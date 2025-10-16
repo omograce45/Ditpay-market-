@@ -68,13 +68,45 @@
       .bottom-nav{display:flex}
     }
 
-    /* Bottom nav */
-    .bottom-nav{display:none;position:fixed;left:0;right:0;bottom:0;background:var(--card);box-shadow:0 -6px 18px rgba(0,0,0,0.06);padding:8px 12px;border-top-left-radius:12px;border-top-right-radius:12px;z-index:60}
-    .bottom-nav ul{display:flex;gap:6px;justify-content:space-between;align-items:center;margin:0;padding:0;list-style:none}
-    .bottom-nav li{flex:1;text-align:center;color:var(--muted);font-size:13px}
-    .bottom-nav li.active{color:var(--dp-primary)}
-    .bottom-nav i{font-size:18px;display:block;margin-bottom:4px}
-
+    /* Bottom nav — always visible like Jiji */
+.bottom-nav{
+  display:flex;
+  position:fixed;
+  left:0;
+  right:0;
+  bottom:0;
+  background:var(--card);
+  box-shadow:0 -6px 18px rgba(0,0,0,0.06);
+  padding:8px 12px;
+  border-top-left-radius:12px;
+  border-top-right-radius:12px;
+  z-index:60;
+}
+.bottom-nav ul{
+  display:flex;
+  gap:6px;
+  justify-content:space-between;
+  align-items:center;
+  margin:0;
+  padding:0;
+  list-style:none;
+}
+.bottom-nav li{
+  flex:1;
+  text-align:center;
+  color:var(--muted);
+  font-size:13px;
+  cursor:pointer;
+}
+.bottom-nav li.active{
+  color:var(--dp-primary);
+}
+.bottom-nav i{
+  font-size:18px;
+  display:block;
+  margin-bottom:4px;
+         }
+    
   </style>
 </head>
 <body>
