@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel - Omo Grace Market</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: #0c6b4f;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .container {
+      max-width: 450px;
+      background: white;
+      margin: 30px auto;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+
+    input, textarea, select, button {
+      width: 100%;
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    button {
+      background: #0c6b4f;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background: #0a5e45;
+    }
+
+    #loginBox {
+      text-align: center;
+      margin-top: 100px;
+    }
+
+    #loginBox input {
+      width: 200px;
+    }
+
+    #formBox {
+      display: none;
+    }
+
+    .msg {
+      text-align: center;
+      color: green;
+      font-weight: bold;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <header>Admin Panel - Omo Grace Market</header>
+
+  <div id="loginBox">
+    <h3>Enter Admin Password</h3>
+    <input type="password" id="password" placeholder="Enter password">
+    <button onclick="checkPassword()">Login</button>
+  </div>
+
+  <div id="formBox" class="container">
+    <h2>Add New Product</h2>
+    <input type="text" id="title" placeholder="Product Title" required>
+    <input type="number" id="price" placeholder="Price" required>
+    <input type="text" id="cat" placeholder="Category (e.g. electronics)">
+    <input type="text" id="city" placeholder="City" required>
+    <input type="text" id="seller" placeholder="Seller Name" required>
+    <input type="text" id="sellerImg" placeholder="Seller Image URL">
+    <input type="text" id="img" placeholder="Product Image URL" required>
+    <textarea id="desc" placeholder="Product Description"></textarea>
+    <button onclick="addProduct()">Add Product</button>
+    <p class="msg" id="msg">✅ Product added successfully!</p>
+  </div>
+
+  <script>
+    const ADMIN_PASSWORD = "Omo@27yrs";
+
+    function checkPassword() {
+      const input = document.getElementById("password").value;
+      if (input === ADMIN_PASSWORD) {
+        document.getElementById("loginBox").style.display = "none";
+        document.getElementById("formBox").style.display = "block";
+      } else {
+        alert("❌ Incorrect password!");
+      }
+    }
+
+    function addProduct() {
+      const newItem = {
+        title: document.getElementById("title").value,
+        price: document.getElementById("price").value,
+        cat: document.getElementById("cat").value,
+        city: document.getElementById("city").value,
+        seller: document.getElementById("seller").value,
+        sellerImg: document.getElementById("sellerImg").value,
+        img: document.getElementById("img").value,
+        desc: document.getElementById("desc").value,
+      };
+
+      let products = JSON.parse(localStorage.getItem("DATA")) || [];
+      products.push(newItem);
+      localStorage.setItem("DATA", JSON.stringify(products));
+
+      document.getElementById("msg").style.display = "block";
+      setTimeout(() => { document.getElementById("msg").style.display = "none"; }, 2000);
+
+      document.querySelectorAll("input, textarea").forEach(el => el.value = "");
+    }
+  </script>
+</body>
+</html>
