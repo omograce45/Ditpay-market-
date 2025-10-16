@@ -24,6 +24,7 @@
       flex-direction: column;
       align-items: center;
       min-height: 100vh;
+      padding-bottom: 80px; /* space for bottom nav */
     }
     header {
       width: 100%;
@@ -112,6 +113,38 @@
       margin-bottom: 10px;
       display: none;
     }
+
+    /* === Bottom Navigation === */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--card);
+      box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 10px 0;
+      border-top-left-radius: 14px;
+      border-top-right-radius: 14px;
+    }
+    .bottom-nav li {
+      list-style: none;
+      text-align: center;
+      color: gray;
+      font-size: 13px;
+      cursor: pointer;
+      flex: 1;
+    }
+    .bottom-nav li i {
+      display: block;
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+    .bottom-nav li.active {
+      color: var(--dp-primary);
+    }
   </style>
 </head>
 <body>
@@ -142,6 +175,18 @@
 
     <button onclick="saveProfile()">Save Changes</button>
   </div>
+
+  <ul class="bottom-nav">
+    <li onclick="window.location.href='index.html'">
+      <i class="fa fa-home"></i><span>Home</span>
+    </li>
+    <li onclick="window.location.href='messages.html'">
+      <i class="fa fa-comments"></i><span>Messages</span>
+    </li>
+    <li class="active" onclick="window.location.href='profile.html'">
+      <i class="fa fa-user"></i><span>Profile</span>
+    </li>
+  </ul>
 
   <script>
     const fileInput = document.getElementById("avatarUpload");
@@ -179,7 +224,6 @@
       setTimeout(() => msg.style.display = "none", 2500);
     }
 
-    // Load saved profile
     window.onload = () => {
       const saved = localStorage.getItem("ditpay_profile");
       if (saved) {
