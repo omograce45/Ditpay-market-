@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DitPay - Messages</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    :root {
+      --dp-primary: #0b3d91;
+      --dp-accent: #f4b400;
+      --bg: #f6f9fb;
+      --card: #ffffff;
+      --muted: #6b7280;
+      --radius: 12px;
+      --shadow: 0 6px 18px rgba(11, 61, 145, 0.08);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      background: var(--bg);
+      color: #0b1220;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 18px;
+      background: var(--card);
+      box-shadow: var(--shadow);
+    }
+    .logo {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--dp-primary), var(--dp-accent));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 18px;
+    }
+    h1 { font-size: 18px; }
+    .chat-container {
+      max-width: 700px;
+      margin: 20px auto;
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      height: 70vh;
+      overflow: hidden;
+    }
+    .messages {
+      flex: 1;
+      overflow-y: auto;
+      padding-right: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .msg {
+      display: flex;
+      align-items: flex-end;
+      gap: 10px;
+    }
+    .msg img {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .bubble {
+      background: #eef3fb;
+      padding: 10px 14px;
+      border-radius: 16px;
+      max-width: 70%;
+      line-height: 1.4;
+    }
+    .msg.you .bubble {
+      background: var(--dp-primary);
+      color: white;
+      border-bottom-right-radius: 4px;
+      margin-left: auto;
+    }
+    .msg.me .bubble {
+      background: #e9eef7;
+      color: #0b1220;
+      border-bottom-left-radius: 4px;
+    }
+    .chat-input {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-top: 1px solid #e5e9f0;
+      padding-top: 10px;
+    }
+    .chat-input input {
+      flex: 1;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid #e1e5ea;
+      font-size: 14px;
+      outline: none;
+    }
+    .chat-input button {
+      background: var(--dp-primary);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 14px;
+      cursor: pointer;
+    }
+    .bottom-nav {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--card);
+      box-shadow: 0 -6px 18px rgba(0, 0, 0, 0.06);
+      padding: 8px 12px;
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+      z-index: 60;
+    }
+    .bottom-nav ul {
+      display: flex;
+      gap: 6px;
+      justify-content: space-between;
+      align-items: center;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .bottom-nav li {
+      flex: 1;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .bottom-nav li.active {
+      color: var(--dp-primary);
+    }
+    .bottom-nav i {
+      font-size: 18px;
+      display: block;
+      margin-bottom: 4px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">DP</div>
+    <h1>Messages</h1>
+    <div></div>
+  </header>
+
+  <div class="chat-container">
+    <div class="messages">
+      <div class="msg me">
+        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&q=60" alt="Me">
+        <div class="bubble">Hello, is the iPhone still available?</div>
+      </div>
+      <div class="msg you">
+        <div class="bubble">Hi! Yes, it's still available.</div>
+        <img src="https://images.unsplash.com/photo-1545996124-1b9f77a0f6e4?w=200&q=60" alt="Seller">
+      </div>
+      <div class="msg me">
+        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&q=60" alt="Me">
+        <div class="bubble">Can I see more pictures?</div>
+      </div>
+      <div class="msg you">
+        <div class="bubble">Sure! I’ll send them shortly.</div>
+        <img src="https://images.unsplash.com/photo-1545996124-1b9f77a0f6e4?w=200&q=60" alt="Seller">
+      </div>
+    </div>
+
+    <div class="chat-input">
+      <input type="text" placeholder="Type a message..." />
+      <button><i class="fa fa-paper-plane"></i></button>
+    </div>
+  </div>
+
+  <nav class="bottom-nav">
+    <ul>
+      <li><i class="fa fa-home"></i>Home</li>
+      <li><i class="fa fa-search"></i>Search</li>
+      <li><i class="fa fa-plus-circle"></i>Post</li>
+      <li class="active"><i class="fa fa-comments"></i>Messages</li>
+      <li><i class="fa fa-user"></i>Profile</li>
+    </ul>
+  </nav>
+</body>
+</html>
