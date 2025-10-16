@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>My Profile — DitPay Market</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
   <style>
@@ -11,231 +11,89 @@
       --dp-accent: #f4b400;
       --bg: #f6f9fb;
       --card: #ffffff;
-      --radius: 14px;
+      --muted: #6b7280;
+      --radius: 12px;
       --shadow: 0 6px 18px rgba(11,61,145,0.08);
     }
-    * { box-sizing: border-box; }
+    * { box-sizing: border-box; margin:0; padding:0; }
     body {
-      margin: 0;
       font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial;
       background: var(--bg);
       color: #0b1220;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-      padding-bottom: 80px; /* space for bottom nav */
-    }
-    header {
-      width: 100%;
-      background: var(--card);
-      box-shadow: var(--shadow);
-      padding: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-    }
-    .logo {
-      width: 52px;
-      height: 52px;
-      border-radius: 14px;
-      background: linear-gradient(135deg, var(--dp-primary), var(--dp-accent));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-weight: 700;
-      font-size: 18px;
-      box-shadow: var(--shadow);
-    }
-    h1 {
-      font-size: 20px;
-      margin: 0;
-      color: var(--dp-primary);
-    }
-    .container {
-      margin-top: 40px;
-      background: var(--card);
-      padding: 24px;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      width: 90%;
-      max-width: 500px;
-    }
-    .avatar-section {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-bottom: 20px;
-    }
-    .avatar {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 3px solid var(--dp-primary);
-      box-shadow: var(--shadow);
-    }
-    .upload-btn {
-      margin-top: 10px;
-      color: var(--dp-accent);
-      font-weight: 600;
-      cursor: pointer;
-    }
-    input, textarea {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 12px;
-      border: 1px solid #e0e0e0;
-      border-radius: 8px;
-      font-size: 15px;
-    }
-    button {
-      width: 100%;
-      background: var(--dp-accent);
-      color: #0b2140;
-      border: 0;
-      padding: 10px 12px;
-      border-radius: 8px;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    button:hover { background: #ffd84a; }
-    .message {
-      background: #d1e7dd;
-      color: #0f5132;
-      padding: 10px;
-      border-radius: 8px;
-      text-align: center;
-      margin-bottom: 10px;
-      display: none;
+      padding-bottom: 70px; /* space for bottom nav */
     }
 
-    /* === Bottom Navigation === */
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: var(--card);
-      box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      padding: 10px 0;
-      border-top-left-radius: 14px;
-      border-top-right-radius: 14px;
+    header{
+      display:flex; align-items:center; gap:16px; justify-content:space-between;
+      padding:16px; background:var(--card); box-shadow:var(--shadow);
     }
-    .bottom-nav li {
-      list-style: none;
-      text-align: center;
-      color: gray;
-      font-size: 13px;
-      cursor: pointer;
-      flex: 1;
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{
+      width:52px; height:52px; border-radius:14px;
+      background:linear-gradient(135deg,var(--dp-primary),var(--dp-accent));
+      display:flex; align-items:center; justify-content:center;
+      color:white; font-weight:700; box-shadow:var(--shadow);
     }
-    .bottom-nav li i {
-      display: block;
-      font-size: 20px;
-      margin-bottom: 4px;
+    .brand h1{margin:0;font-size:18px}
+    .brand div{font-size:13px;color:var(--muted)}
+
+    main{
+      max-width:600px; margin:20px auto; padding:16px;
+      background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow);
     }
-    .bottom-nav li.active {
-      color: var(--dp-primary);
+    main h2{margin-bottom:10px;color:var(--dp-primary)}
+    .profile-info{display:flex;flex-direction:column;gap:10px}
+    .profile-info div{display:flex;justify-content:space-between;border-bottom:1px solid #e9eef0;padding:8px 0}
+    .profile-info span{color:var(--muted)}
+    .edit-btn{margin-top:14px;background:var(--dp-primary);color:white;border:0;padding:10px 14px;border-radius:8px;cursor:pointer;font-weight:600}
+
+    /* Bottom nav — same as index.html */
+    .bottom-nav{
+      display:flex; position:fixed; left:0; right:0; bottom:0;
+      background:var(--card); box-shadow:0 -6px 18px rgba(0,0,0,0.06);
+      padding:8px 12px; border-top-left-radius:12px; border-top-right-radius:12px; z-index:60;
     }
+    .bottom-nav ul{
+      display:flex; justify-content:space-around; align-items:center;
+      width:100%; margin:0; padding:0; list-style:none;
+    }
+    .bottom-nav li{
+      flex:1; text-align:center; color:var(--muted); font-size:13px; cursor:pointer;
+    }
+    .bottom-nav li.active{ color:var(--dp-primary); }
+    .bottom-nav i{ font-size:18px; display:block; margin-bottom:4px; }
   </style>
 </head>
 <body>
   <header>
-    <div class="logo">DP</div>
-    <div>
-      <h1>My Profile — DitPay Market</h1>
-      <div style="font-size:13px;color:gray">Update your personal details</div>
+    <div class="brand">
+      <div class="logo">DP</div>
+      <div>
+        <h1>My Profile</h1>
+        <div>Manage your account</div>
+      </div>
     </div>
   </header>
 
-  <div class="container">
-    <div class="message" id="successMsg">✅ Profile updated successfully!</div>
-
-    <div class="avatar-section">
-      <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="Profile Picture" id="avatarPreview" class="avatar">
-      <label class="upload-btn">
-        <input type="file" id="avatarUpload" accept="image/*" style="display:none;">
-        Change Profile Picture
-      </label>
+  <main>
+    <h2>Account Information</h2>
+    <div class="profile-info">
+      <div><span>Full Name:</span> <strong>Omo Grace</strong></div>
+      <div><span>Email:</span> <strong>omo@27yrs.com</strong></div>
+      <div><span>Phone:</span> <strong>+234 816 420 0545</strong></div>
+      <div><span>Location:</span> <strong>Lagos, Nigeria</strong></div>
     </div>
+    <button class="edit-btn">Edit Profile</button>
+  </main>
 
-    <input type="text" id="name" placeholder="Full Name" />
-    <input type="email" id="email" placeholder="Email" />
-    <input type="text" id="phone" placeholder="Phone Number" />
-    <input type="text" id="location" placeholder="Location" />
-    <textarea id="about" placeholder="About you" rows="3"></textarea>
-
-    <button onclick="saveProfile()">Save Changes</button>
-  </div>
-
-  <ul class="bottom-nav">
-    <li onclick="window.location.href='index.html'">
-      <i class="fa fa-home"></i><span>Home</span>
-    </li>
-    <li onclick="window.location.href='messages.html'">
-      <i class="fa fa-comments"></i><span>Messages</span>
-    </li>
-    <li class="active" onclick="window.location.href='profile.html'">
-      <i class="fa fa-user"></i><span>Profile</span>
-    </li>
-  </ul>
-
-  <script>
-    const fileInput = document.getElementById("avatarUpload");
-    const preview = document.getElementById("avatarPreview");
-
-    fileInput.addEventListener("change", function(event) {
-      const file = event.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          preview.src = e.target.result;
-        };
-        reader.readAsDataURL(file);
-      }
-    });
-
-    function saveProfile() {
-      const name = document.getElementById("name").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const phone = document.getElementById("phone").value.trim();
-      const location = document.getElementById("location").value.trim();
-      const about = document.getElementById("about").value.trim();
-      const avatar = preview.src;
-
-      if (!name || !email || !phone) {
-        alert("Please fill all required fields.");
-        return;
-      }
-
-      const profile = { name, email, phone, location, about, avatar };
-      localStorage.setItem("ditpay_profile", JSON.stringify(profile));
-
-      const msg = document.getElementById("successMsg");
-      msg.style.display = "block";
-      setTimeout(() => msg.style.display = "none", 2500);
-    }
-
-    window.onload = () => {
-      const saved = localStorage.getItem("ditpay_profile");
-      if (saved) {
-        const data = JSON.parse(saved);
-        document.getElementById("name").value = data.name || "";
-        document.getElementById("email").value = data.email || "";
-        document.getElementById("phone").value = data.phone || "";
-        document.getElementById("location").value = data.location || "";
-        document.getElementById("about").value = data.about || "";
-        if (data.avatar) preview.src = data.avatar;
-      }
-    };
-  </script>
+  <nav class="bottom-nav">
+    <ul>
+      <li onclick="window.location.href='index.html'"><i class="fa fa-home"></i>Home</li>
+      <li><i class="fa fa-search"></i>Search</li>
+      <li><i class="fa fa-plus-circle"></i>Post</li>
+      <li onclick="window.location.href='messages.html'"><i class="fa fa-comments"></i>Messages</li>
+      <li class="active"><i class="fa fa-user"></i>Profile</li>
+    </ul>
+  </nav>
 </body>
 </html>
