@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DitPay Market — Admin Panel</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    :root {
+      --dp-primary: #0b3d91;
+      --dp-accent: #f4b400;
+      --bg: #f6f9fb;
+      --card: #ffffff;
+      --radius: 12px;
+      --shadow: 0 6px 18px rgba(11,61,145,0.08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      background: var(--bg);
+      color: #0b1220;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+    header {
+      width: 100%;
+      background: var(--card);
+      box-shadow: var(--shadow);
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+    .logo {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--dp-primary), var(--dp-accent));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      box-shadow: var(--shadow);
+      font-size: 18px;
+    }
+    h1 {
+      font-size: 20px;
+      margin: 0;
+      color: var(--dp-primary);
+    }
+    .container {
+      margin-top: 40px;
+      background: var(--card);
+      padding: 24px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      width: 90%;
+      max-width: 500px;
+    }
+    .hidden { display: none; }
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 12px;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+    button {
+      width: 100%;
+      background: var(--dp-accent);
+      color: #0b2140;
+      border: 0;
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover { background: #ffd84a; }
+    .message {
+      background: #d1e7dd;
+      color: #0f5132;
+      padding: 10px;
+      border-radius: 8px;
+      text-align: center;
+      margin-bottom: 10px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">DP</div>
+    <div>
+      <h1>DitPay Market — Admin Panel</h1>
+      <div style="font-size:13px;color:gray">Only authorized admin can post</div>
+    </div>
+  </header>
+
+  <div class="container" id="loginContainer">
+    <h3 style="text-align:center;color:var(--dp-primary)">Admin Login</h3>
+    <input type="password" id="password" placeholder="Enter Password" />
+    <button onclick="checkPassword()">Login</button>
+    <p id="error" style="color:red;text-align:center;margin-top:10px;display:none;">Incorrect password!</p>
+  </div>
+
+  <div class="container hidden" id="formContainer">
+    <h3 style="text-align:center;color:var(--dp-primary)">Add New Product</h3>
+    <div class="message" id="successMsg">✅ Post added successfully!</div>
+    <input type="text" id="title" placeholder="Product Title" required />
+    <input type="number" id="price" placeholder="Price (₦)" required />
+    <select id="category">
+      <option value="">Select Category</option>
+      <option value="electronics">Electronics</option>
+      <option value="vehicles">Vehicles</option>
+      <option value="property">Property</option>
+      <option value="services">Services</option>
+    </select>
+    <input type="text" id="city" placeholder="City" required />
+    <input type="text" id="seller" placeholder="Seller Name" required />
+    <input type="text" id="image" placeholder="Image URL" required />
+    <textarea id="desc" placeholder="Description" rows="3"></textarea>
+    <button onclick="addPost()">Add Post</button>
+  </div>
+
+  <script>
+    const PASSWORD = "Omo@27yrs";
+
+    function checkPassword() {
+      const input = document.getElementById('password').value;
+      if (input === PASSWORD) {
+        document.getElementById('loginContainer').classList.add('hidden');
+        document.getElementById('formContainer').classList.remove('hidden');
+      } else {
+        const err = document.getElementById('error');
+        err.style.display = 'block';
+        setTimeout(() => err.style.display = 'none', 2000);
+      }
+    }
+
+    function addPost() {
+      const title = document.getElementById('title').value.trim();
+      const price = document.getElementById('price').value.trim();
+      const category = document.getElementById('category').value;
+      const city = document.getElementById('city').value.trim();
+      const seller = document.getElementById('seller').value.trim();
+      const image = document.getElementById('image').value.trim();
+      const desc = document.getElementById('desc').value.trim();
+
+      if (!title || !price || !category || !city || !seller || !image) {
+        alert("Please fill all fields.");
+        return;
+      }
+
+      const post = { title, price, category, city, seller, image, desc, date: new Date().toISOString() };
+
+      const posts = JSON.parse(localStorage.getItem("ditpay_posts") || "[]");
+      posts.push(post);
+      localStorage.setItem("ditpay_posts", JSON.stringify(posts));
+
+      const msg = document.getElementById('successMsg');
+      msg.style.display = 'block';
+      setTimeout(() => msg.style.display = 'none', 2500);
+
+      document.querySelectorAll('#formContainer input, #formContainer textarea').forEach(i => i.value = "");
+    }
+  </script>
+</body>
+</html>
