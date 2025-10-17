@@ -6,18 +6,109 @@
   <title>Product Details - DitPay</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
   <style>
-    :root{--dp-primary:#0b3d91;--bg:#f6f9fb;--card:#fff;--muted:#6b7280;--shadow:0 6px 18px rgba(11,61,145,0.06)}
-    body{margin:0;font-family:Inter,system-ui;background:var(--bg);color:#0b1220}
-    .wrap{max-width:900px;margin:20px auto;padding:16px}
-    .back{color:var(--dp-primary);text-decoration:none;display:inline-flex;align-items:center;gap:8px;margin-bottom:12px}
-    .card{background:var(--card);padding:14px;border-radius:12px;box-shadow:var(--shadow);display:grid;grid-template-columns:1fr 320px;gap:16px}
-    .gallery img{width:100%;height:420px;object-fit:cover;border-radius:10px}
-    .info h2{margin:0 0 6px 0}
-    .price{color:var(--dp-primary);font-weight:800;font-size:22px;margin-bottom:10px}
-    .meta{color:var(--muted);margin-bottom:10px}
-    .seller{display:flex;gap:10px;align-items:center;border-top:1px solid #f0f3f6;padding-top:10px;margin-top:12px}
-    .seller img{width:56px;height:56px;border-radius:50%;object-fit:cover}
-    @media(max-width:720px){.card{grid-template-columns:1fr} .gallery img{height:260px}}
+    :root {
+      --dp-primary:#0b3d91;
+      --bg:#f6f9fb;
+      --card:#fff;
+      --muted:#6b7280;
+      --shadow:0 6px 18px rgba(11,61,145,0.06);
+    }
+    body {
+      margin:0;
+      font-family:Inter,system-ui;
+      background:var(--bg);
+      color:#0b1220;
+      padding-bottom:70px; /* space for nav */
+    }
+    .wrap {
+      max-width:900px;
+      margin:20px auto;
+      padding:16px;
+    }
+    .back {
+      color:var(--dp-primary);
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      margin-bottom:12px;
+    }
+    .card {
+      background:var(--card);
+      padding:14px;
+      border-radius:12px;
+      box-shadow:var(--shadow);
+      display:grid;
+      grid-template-columns:1fr 320px;
+      gap:16px;
+    }
+    .gallery img {
+      width:100%;
+      height:420px;
+      object-fit:cover;
+      border-radius:10px;
+    }
+    .info h2 { margin:0 0 6px 0; }
+    .price {
+      color:var(--dp-primary);
+      font-weight:800;
+      font-size:22px;
+      margin-bottom:10px;
+    }
+    .meta { color:var(--muted); margin-bottom:10px; }
+    .seller {
+      display:flex;
+      gap:10px;
+      align-items:center;
+      border-top:1px solid #f0f3f6;
+      padding-top:10px;
+      margin-top:12px;
+    }
+    .seller img {
+      width:56px;
+      height:56px;
+      border-radius:50%;
+      object-fit:cover;
+    }
+    @media(max-width:720px){
+      .card{grid-template-columns:1fr;}
+      .gallery img{height:260px;}
+    }
+
+    /* 🔹 Bottom Navigation */
+    .bottom-nav {
+      position:fixed;
+      left:0; right:0; bottom:0;
+      background:var(--card);
+      box-shadow:0 -6px 18px rgba(0,0,0,0.06);
+      padding:8px 12px;
+      border-top-left-radius:12px;
+      border-top-right-radius:12px;
+      z-index:60;
+    }
+    .bottom-nav ul {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      list-style:none;
+      margin:0;
+      padding:0;
+    }
+    .bottom-nav li {
+      flex:1;
+      text-align:center;
+      color:var(--muted);
+      font-size:13px;
+      cursor:pointer;
+    }
+    .bottom-nav li.active {
+      color:var(--dp-primary);
+    }
+    .bottom-nav i {
+      font-size:18px;
+      display:block;
+      margin-bottom:4px;
+    }
   </style>
 </head>
 <body>
@@ -34,13 +125,27 @@
         </div>
         <div class="seller">
           <img src="" id="sellerImg" alt="seller"/>
-          <div><small style="color:var(--muted)">Seller</small><div id="sellerName" style="font-weight:700"></div></div>
+          <div>
+            <small style="color:var(--muted)">Seller</small>
+            <div id="sellerName" style="font-weight:700"></div>
+          </div>
         </div>
       </aside>
     </div>
   </div>
+
+  <!-- ✅ Bottom Navigation (No Post Button) -->
+  <nav class="bottom-nav">
+    <ul>
+      <li data-page="home"><i class="fa fa-home"></i>Home</li>
+      <li data-page="search"><i class="fa fa-search"></i>Search</li>
+      <li data-page="messages"><i class="fa fa-comments"></i>Messages</li>
+      <li data-page="profile"><i class="fa fa-user"></i>Profile</li>
+    </ul>
+  </nav>
+
   <script>
-    // Same DATA used in index (demo). In production fetch from API.
+    // Product details logic
     const DATA = [
       {id:1,title:'iPhone 13 Pro Max - 256GB',price:720000,cat:'electronics',city:'Lagos',seller:'Grace Phones',sellerImg:'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&q=60',img:'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1200&q=60',desc:'Excellent condition, battery 90%.'},
       {id:2,title:'Yamaha YBR 125 - 2018',price:430000,cat:'vehicles',city:'Abuja',seller:'RideOn NG',sellerImg:'https://images.unsplash.com/photo-1545996124-1b9f77a0f6e4?w=200&q=60',img:'https://images.unsplash.com/photo-1517821099600-5d7c3b3b2df4?w=1200&q=60',desc:'Well maintained, single owner.'},
@@ -65,6 +170,21 @@
     document.getElementById('sellerImg').src = item.sellerImg;
     document.getElementById('sellerName').textContent = item.seller;
 
+    // ✅ Navigation Logic
+    const navItems = document.querySelectorAll('.bottom-nav li');
+    navItems.forEach(item=>{
+      item.addEventListener('click',()=>{
+        navItems.forEach(li=>li.classList.remove('active'));
+        item.classList.add('active');
+        const page=item.getAttribute('data-page');
+        switch(page){
+          case 'home': window.location.href='index.html'; break;
+          case 'search': window.location.href='index.html#search'; break;
+          case 'messages': window.location.href='messages.html'; break;
+          case 'profile': window.location.href='profile.html'; break;
+        }
+      });
+    });
   </script>
 </body>
 </html>
