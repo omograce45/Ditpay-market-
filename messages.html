@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DitPay - Messages</title>
+  <title>Messages — DitPay Market</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
   <style>
     :root {
@@ -13,13 +13,14 @@
       --card: #ffffff;
       --muted: #6b7280;
       --radius: 12px;
-      --shadow: 0 6px 18px rgba(11, 61, 145, 0.08);
+      --shadow: 0 6px 18px rgba(11,61,145,0.08);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial;
       background: var(--bg);
       color: #0b1220;
+      padding-bottom: 70px; /* for nav space */
     }
     header {
       display: flex;
@@ -41,7 +42,7 @@
       font-weight: 700;
       font-size: 18px;
     }
-    h1 { font-size: 18px; }
+    h1 { font-size: 18px; color: var(--dp-primary); }
     .chat-container {
       max-width: 700px;
       margin: 20px auto;
@@ -114,6 +115,8 @@
       padding: 10px 14px;
       cursor: pointer;
     }
+
+    /* Bottom Navigation */
     .bottom-nav {
       position: fixed;
       left: 0;
@@ -128,8 +131,7 @@
     }
     .bottom-nav ul {
       display: flex;
-      gap: 6px;
-      justify-content: space-between;
+      justify-content: space-around;
       align-items: center;
       list-style: none;
       margin: 0;
@@ -140,6 +142,7 @@
       text-align: center;
       color: var(--muted);
       font-size: 13px;
+      cursor: pointer;
     }
     .bottom-nav li.active {
       color: var(--dp-primary);
@@ -154,7 +157,7 @@
 <body>
   <header>
     <div class="logo">DP</div>
-    <h1>Messages-Ditpay Market</h1>
+    <h1>Messages — DitPay Market</h1>
     <div></div>
   </header>
 
@@ -184,14 +187,27 @@
     </div>
   </div>
 
+  <!-- ✅ Fixed bottom navigation (links same as index page, post removed) -->
   <nav class="bottom-nav">
-    <ul>
-      <li><i class="fa fa-home"></i>Home</li>
-      <li><i class="fa fa-search"></i>Search</li>
-      <li><i class="fa fa-plus-circle"></i>Post</li>
-      <li class="active"><i class="fa fa-comments"></i>Messages</li>
-      <li><i class="fa fa-user"></i>Profile</li>
+    <ul id="bottomNav">
+      <li data-page="index.html"><i class="fa fa-home"></i>Home</li>
+      <li data-page="search.html"><i class="fa fa-search"></i>Search</li>
+      <li class="active" data-page="messages.html"><i class="fa fa-comments"></i>Messages</li>
+      <li data-page="profile.html"><i class="fa fa-user"></i>Profile</li>
     </ul>
   </nav>
+
+  <script>
+    // Bottom navigation link behavior
+    const navItems = document.querySelectorAll("#bottomNav li");
+    navItems.forEach(li => {
+      li.addEventListener("click", () => {
+        navItems.forEach(i => i.classList.remove("active"));
+        li.classList.add("active");
+        const page = li.getAttribute("data-page");
+        if (page !== "messages.html") window.location.href = page;
+      });
+    });
+  </script>
 </body>
 </html>
