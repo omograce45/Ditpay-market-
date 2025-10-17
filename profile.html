@@ -24,6 +24,7 @@
       flex-direction: column;
       align-items: center;
       min-height: 100vh;
+      padding-bottom: 70px; /* space for bottom nav */
     }
     header {
       width: 100%;
@@ -113,43 +114,43 @@
       display: none;
     }
 
-    /* Bottom navigation like index.html */
-    .bottom-nav{
-      display:flex;
-      position:fixed;
-      left:0;
-      right:0;
-      bottom:0;
-      background:var(--card);
-      box-shadow:0 -6px 18px rgba(0,0,0,0.06);
-      padding:8px 12px;
-      border-top-left-radius:12px;
-      border-top-right-radius:12px;
-      z-index:60;
+    /* Bottom navigation (same style as index page) */
+    .bottom-nav {
+      display: flex;
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--card);
+      box-shadow: 0 -6px 18px rgba(0,0,0,0.06);
+      padding: 8px 12px;
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+      z-index: 60;
     }
-    .bottom-nav ul{
-      display:flex;
-      justify-content:space-around;
-      align-items:center;
-      width:100%;
-      margin:0;
-      padding:0;
-      list-style:none;
+    .bottom-nav ul {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      list-style: none;
     }
-    .bottom-nav li{
-      flex:1;
-      text-align:center;
-      color:#6b7280;
-      font-size:13px;
-      cursor:pointer;
+    .bottom-nav li {
+      flex: 1;
+      text-align: center;
+      color: #6b7280;
+      font-size: 13px;
+      cursor: pointer;
     }
-    .bottom-nav li.active{
-      color:var(--dp-primary);
+    .bottom-nav li.active {
+      color: var(--dp-primary);
     }
-    .bottom-nav i{
-      font-size:18px;
-      display:block;
-      margin-bottom:4px;
+    .bottom-nav i {
+      font-size: 18px;
+      display: block;
+      margin-bottom: 4px;
     }
   </style>
 </head>
@@ -182,18 +183,18 @@
     <button onclick="saveProfile()">Save Changes</button>
   </div>
 
-  <!-- Bottom navigation -->
+  <!-- ✅ Bottom navigation (Post removed) -->
   <nav class="bottom-nav">
-    <ul>
-      <li onclick="window.location.href='index.html'"><i class="fa fa-home"></i>Home</li>
-      <li><i class="fa fa-search"></i>Search</li>
-      <li><i class="fa fa-plus-circle"></i>Post</li>
-      <li onclick="window.location.href='messages.html'"><i class="fa fa-comments"></i>Messages</li>
-      <li class="active" onclick="window.location.href='profile.html'"><i class="fa fa-user"></i>Profile</li>
+    <ul id="bottomNav">
+      <li data-page="index.html"><i class="fa fa-home"></i>Home</li>
+      <li data-page="search.html"><i class="fa fa-search"></i>Search</li>
+      <li data-page="messages.html"><i class="fa fa-comments"></i>Messages</li>
+      <li class="active" data-page="profile.html"><i class="fa fa-user"></i>Profile</li>
     </ul>
   </nav>
 
   <script>
+    // Avatar upload preview
     const fileInput = document.getElementById("avatarUpload");
     const preview = document.getElementById("avatarPreview");
 
@@ -208,6 +209,7 @@
       }
     });
 
+    // Save profile data to localStorage
     function saveProfile() {
       const name = document.getElementById("name").value.trim();
       const email = document.getElementById("email").value.trim();
@@ -229,6 +231,7 @@
       setTimeout(() => msg.style.display = "none", 2500);
     }
 
+    // Load saved profile data
     window.onload = () => {
       const saved = localStorage.getItem("ditpay_profile");
       if (saved) {
@@ -240,6 +243,17 @@
         document.getElementById("about").value = data.about || "";
         if (data.avatar) preview.src = data.avatar;
       }
+
+      // Bottom navigation linking
+      const navItems = document.querySelectorAll("#bottomNav li");
+      navItems.forEach(li => {
+        li.addEventListener("click", () => {
+          navItems.forEach(i => i.classList.remove("active"));
+          li.classList.add("active");
+          const page = li.getAttribute("data-page");
+          if (page !== "profile.html") window.location.href = page;
+        });
+      });
     };
   </script>
 </body>
