@@ -179,8 +179,8 @@
       <li class="active" data-action="home">
         <i class="fa fa-home"></i>Home
       </li>
-      <li data-action="search">
-        <i class="fa fa-search"></i>Search
+      <li data-action="about">
+        <i class="fa fa-info-circle"></i>About
       </li>
       <li data-action="messages">
         <i class="fa fa-comments"></i><span>Messages</span>
@@ -301,9 +301,8 @@
           case 'home':
             window.location.href = 'index.html';
             break;
-          case 'search':
-            applySearchAndFilters();
-            window.scrollTo({ top: 100, behavior: 'smooth' });
+          case 'about':
+            window.location.href = 'about.html';
             break;
           case 'messages':
             window.location.href = 'messages.html';
@@ -316,4 +315,4 @@
     });
   </script>
 </body>
-</html>
+          </html>
