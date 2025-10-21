@@ -152,6 +152,95 @@
       display: block;
       margin-bottom: 4px;
     }
+
+    /* WhatsApp Floating Chat */
+    .whatsapp-container {
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      z-index: 100;
+    }
+
+    .whatsapp-toggle {
+      background: var(--dp-accent);
+      color: white;
+      font-size: 26px;
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .whatsapp-toggle:hover {
+      background: #ffcc00;
+      transform: scale(1.08);
+    }
+
+    .whatsapp-chat-box {
+      position: absolute;
+      bottom: 70px;
+      right: 0;
+      width: 280px;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+      overflow: hidden;
+      display: none;
+      animation: fadeInUp 0.3s ease;
+    }
+
+    .wa-header {
+      background: var(--dp-primary);
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px;
+    }
+
+    .wa-header img {
+      width: 30px;
+      height: 30px;
+    }
+
+    .wa-header h4 {
+      margin: 0;
+      font-size: 15px;
+    }
+
+    .wa-header p {
+      margin: 0;
+      font-size: 12px;
+      opacity: 0.8;
+    }
+
+    .wa-body {
+      padding: 14px;
+      font-size: 14px;
+      color: #333;
+    }
+
+    .wa-body a {
+      display: inline-block;
+      margin-top: 10px;
+      background: #25d366;
+      color: white;
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
   </style>
 </head>
 <body>
@@ -187,7 +276,7 @@
     </div>
   </div>
 
-  <!-- ✅ Fixed bottom navigation (links same as index page, post removed) -->
+  <!-- ✅ Fixed bottom navigation -->
   <nav class="bottom-nav">
     <ul id="bottomNav">
       <li data-page="index.html"><i class="fa fa-home"></i>Home</li>
@@ -195,6 +284,27 @@
       <li data-page="profile.html"><i class="fa fa-user"></i>Profile</li>
     </ul>
   </nav>
+
+  <!-- ✅ WhatsApp Floating Toggle + Chat -->
+  <div class="whatsapp-container">
+    <div class="whatsapp-toggle">
+      <i class="fab fa-whatsapp"></i>
+    </div>
+
+    <div class="whatsapp-chat-box" id="waBox">
+      <div class="wa-header">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WA">
+        <div>
+          <h4>DitPay Support</h4>
+          <p>Typically replies within minutes</p>
+        </div>
+      </div>
+      <div class="wa-body">
+        <p>👋 Hi there! Need help with your purchase?</p>
+        <a href="https://wa.me/234XXXXXXXXXX" target="_blank">Chat on WhatsApp</a>
+      </div>
+    </div>
+  </div>
 
   <script>
     // Bottom navigation link behavior
@@ -206,6 +316,16 @@
         const page = li.getAttribute("data-page");
         if (page !== "messages.html") window.location.href = page;
       });
+    });
+
+    // WhatsApp toggle behavior
+    const toggleBtn = document.querySelector('.whatsapp-toggle');
+    const chatBox = document.getElementById('waBox');
+    let isOpen = false;
+
+    toggleBtn.addEventListener('click', () => {
+      isOpen = !isOpen;
+      chatBox.style.display = isOpen ? 'block' : 'none';
     });
   </script>
 </body>
