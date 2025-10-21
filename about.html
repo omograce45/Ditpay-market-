@@ -15,28 +15,22 @@
       --radius: 12px;
       --shadow: 0 6px 18px rgba(11,61,145,0.08);
     }
-
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial;
       background: var(--bg);
       color: #0b1220;
+      padding-bottom: 70px; /* for nav space */
       line-height: 1.6;
-      padding-bottom: 70px; /* space for bottom nav */
     }
-
     header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 16px 20px;
+      padding: 14px 18px;
       background: var(--card);
       box-shadow: var(--shadow);
-      position: sticky;
-      top: 0;
-      z-index: 100;
     }
-
     .logo {
       width: 48px;
       height: 48px;
@@ -49,85 +43,67 @@
       font-weight: 700;
       font-size: 18px;
     }
-
-    h1 {
-      color: var(--dp-primary);
-      font-size: 20px;
-    }
-
+    h1 { font-size: 18px; color: var(--dp-primary); }
     main {
       max-width: 850px;
-      margin: 30px auto;
+      margin: 20px auto;
       background: var(--card);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      padding: 30px;
+      padding: 20px;
     }
-
     h2 {
       color: var(--dp-primary);
       margin-top: 20px;
       font-size: 18px;
     }
-
     p {
       margin-top: 8px;
       color: #333;
       font-size: 15px;
     }
-
     ul {
       margin: 10px 0 0 20px;
     }
-
     li {
       margin-bottom: 6px;
     }
 
-    footer {
-      text-align: center;
-      padding: 20px;
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    /* Bottom navigation */
+    /* Bottom Navigation */
     .bottom-nav {
       position: fixed;
-      bottom: 0;
       left: 0;
-      width: 100%;
+      right: 0;
+      bottom: 0;
       background: var(--card);
-      box-shadow: 0 -3px 10px rgba(0,0,0,0.1);
+      box-shadow: 0 -6px 18px rgba(0, 0, 0, 0.06);
+      padding: 8px 12px;
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+      z-index: 60;
+    }
+    .bottom-nav ul {
       display: flex;
       justify-content: space-around;
       align-items: center;
-      padding: 8px 0;
-      z-index: 200;
-    }
-
-    .bottom-nav li {
       list-style: none;
-      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+    .bottom-nav li {
       flex: 1;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+      cursor: pointer;
     }
-
-    .bottom-nav a {
+    .bottom-nav li.active {
       color: var(--dp-primary);
-      text-decoration: none;
-      font-size: 14px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
     }
-
     .bottom-nav i {
       font-size: 18px;
+      display: block;
       margin-bottom: 4px;
-    }
-
-    .bottom-nav .active {
-      color: var(--dp-accent);
     }
   </style>
 </head>
@@ -139,8 +115,8 @@
   </header>
 
   <main>
-    <h2>About DitPay</h2>
-    <p>At DitPay, our mission is simple: <em>Empower every buyer and seller in Nigeria to trade smart, safe and seamless.</em> We are your trusted digital marketplace — where you can <strong>buy</strong>, <strong>sell</strong> or <strong>discover</strong> goods and services with ease.</p>
+    <h2>About DitPay</h2>
+    <p>At DitPay, our mission is simple: <em>Empower every buyer and seller in Nigeria to trade smart, safe and seamless.</em> We are your trusted digital marketplace — where you can <strong>buy</strong>, <strong>sell</strong> or <strong>discover</strong> goods and services with ease.</p>
 
     <h2>What we do</h2>
     <ul>
@@ -155,7 +131,7 @@
       <li>Register quickly with your email or phone number.</li>
       <li>Upload clear photos and write a detailed description of your item.</li>
       <li>Set a fair price, publish your ad and monitor responses in real time.</li>
-      <li>Respond promptly to messages and arrange safe meet-ups or delivery.</li>
+      <li>Respond promptly to messages and arrange safe meet‑ups or delivery.</li>
     </ul>
 
     <h3>For Buyers</h3>
@@ -171,29 +147,39 @@
 
     <h2>Why choose DitPay?</h2>
     <ul>
-      <li><strong>Local focus, global standard</strong> — We know Nigeria’s market and bring best-in-class platform features to you.</li>
-      <li><strong>Wide variety</strong> — Thousands of listings every day across categories and price-points.</li>
-      <li><strong>User-driven marketplace</strong> — Real people list real items; no middleman markup.</li>
+      <li><strong>Local focus, global standard</strong> — We know Nigeria’s market and bring best‑in‑class platform features to you.</li>
+      <li><strong>Wide variety</strong> — Thousands of listings every day across categories and price‑points.</li>
+      <li><strong>User‑driven marketplace</strong> — Real people list real items; no middleman markup.</li>
       <li><strong>Fast and efficient</strong> — Post a listing and reach potential buyers in hours.</li>
     </ul>
 
     <h2>Our vision</h2>
-    <p>We aim to build Nigeria’s go-to marketplace, where everyone has the chance to sell what they don’t need and buy what they want — at the right price, with the right people.</p>
+    <p>We aim to build Nigeria’s go‑to marketplace, where everyone has the chance to sell what they don’t need and buy what they want — at the right price, with the right people.</p>
 
     <h2>Join us</h2>
     <p>Whether you’re looking to <strong>sell something today</strong>, <strong>find a bargain</strong>, or <strong>explore new opportunities</strong> — DitPay is here for you. Let’s trade smarter, together.</p>
   </main>
 
-  <footer>
-    &copy; 2025 DitPay Market — All Rights Reserved.
-  </footer>
+  <!-- ✅ Bottom Navigation -->
+  <nav class="bottom-nav">
+    <ul id="bottomNav">
+      <li data-page="index.html"><i class="fa fa-home"></i>Home</li>
+      <li data-page="messages.html"><i class="fa fa-comments"></i>Messages</li>
+      <li class="active" data-page="about_ditpay.html"><i class="fa fa-user"></i>Profile</li>
+    </ul>
+  </nav>
 
-  <!-- Bottom Navigation -->
-  <ul class="bottom-nav">
-    <li><a href="index.html"><i class="fa fa-home"></i><span>Home</span></a></li>
-    <li><a href="messages.html"><i class="fa fa-comment"></i><span>Messages</span></a></li>
-    <li><a href="profile.html"><i class="fa fa-user"></i><span>Profile</span></a></li>
-    <li><a href="about_ditpay.html" class="active"><i class="fa fa-info-circle"></i><span>About</span></a></li>
-  </ul>
+  <script>
+    // Bottom navigation link behavior
+    const navItems = document.querySelectorAll("#bottomNav li");
+    navItems.forEach(li => {
+      li.addEventListener("click", () => {
+        navItems.forEach(i => i.classList.remove("active"));
+        li.classList.add("active");
+        const page = li.getAttribute("data-page");
+        if (page !== "about_ditpay.html") window.location.href = page;
+      });
+    });
+  </script>
 </body>
 </html>
