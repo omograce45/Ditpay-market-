@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Messages — DitPay Market</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About — DitPay Market</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
   <style>
     :root {
@@ -21,6 +21,7 @@
       background: var(--bg);
       color: #0b1220;
       padding-bottom: 70px; /* for nav space */
+      line-height: 1.6;
     }
     header {
       display: flex;
@@ -43,77 +44,29 @@
       font-size: 18px;
     }
     h1 { font-size: 18px; color: var(--dp-primary); }
-    .chat-container {
-      max-width: 700px;
+    main {
+      max-width: 850px;
       margin: 20px auto;
       background: var(--card);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      padding: 16px;
-      display: flex;
-      flex-direction: column;
-      height: 70vh;
-      overflow: hidden;
+      padding: 20px;
     }
-    .messages {
-      flex: 1;
-      overflow-y: auto;
-      padding-right: 6px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
+    h2 {
+      color: var(--dp-primary);
+      margin-top: 20px;
+      font-size: 18px;
     }
-    .msg {
-      display: flex;
-      align-items: flex-end;
-      gap: 10px;
+    p {
+      margin-top: 8px;
+      color: #333;
+      font-size: 15px;
     }
-    .msg img {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      object-fit: cover;
+    ul {
+      margin: 10px 0 0 20px;
     }
-    .bubble {
-      background: #eef3fb;
-      padding: 10px 14px;
-      border-radius: 16px;
-      max-width: 70%;
-      line-height: 1.4;
-    }
-    .msg.you .bubble {
-      background: var(--dp-primary);
-      color: white;
-      border-bottom-right-radius: 4px;
-      margin-left: auto;
-    }
-    .msg.me .bubble {
-      background: #e9eef7;
-      color: #0b1220;
-      border-bottom-left-radius: 4px;
-    }
-    .chat-input {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      border-top: 1px solid #e5e9f0;
-      padding-top: 10px;
-    }
-    .chat-input input {
-      flex: 1;
-      padding: 10px 12px;
-      border-radius: 10px;
-      border: 1px solid #e1e5ea;
-      font-size: 14px;
-      outline: none;
-    }
-    .chat-input button {
-      background: var(--dp-primary);
-      color: white;
-      border: none;
-      border-radius: 10px;
-      padding: 10px 14px;
-      cursor: pointer;
+    li {
+      margin-bottom: 6px;
     }
 
     /* Bottom Navigation */
@@ -152,159 +105,69 @@
       display: block;
       margin-bottom: 4px;
     }
-
-    /* WhatsApp Floating Chat */
-    .whatsapp-container {
-      position: fixed;
-      bottom: 90px;
-      right: 20px;
-      z-index: 100;
-    }
-
-    .whatsapp-toggle {
-      background: var(--dp-accent);
-      color: white;
-      font-size: 26px;
-      width: 55px;
-      height: 55px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .whatsapp-toggle:hover {
-      background: #ffcc00;
-      transform: scale(1.08);
-    }
-
-    .whatsapp-chat-box {
-      position: absolute;
-      bottom: 70px;
-      right: 0;
-      width: 280px;
-      background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.2);
-      overflow: hidden;
-      display: none;
-      animation: fadeInUp 0.3s ease;
-    }
-
-    .wa-header {
-      background: var(--dp-primary);
-      color: white;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px;
-    }
-
-    .wa-header img {
-      width: 30px;
-      height: 30px;
-    }
-
-    .wa-header h4 {
-      margin: 0;
-      font-size: 15px;
-    }
-
-    .wa-header p {
-      margin: 0;
-      font-size: 12px;
-      opacity: 0.8;
-    }
-
-    .wa-body {
-      padding: 14px;
-      font-size: 14px;
-      color: #333;
-    }
-
-    .wa-body a {
-      display: inline-block;
-      margin-top: 10px;
-      background: #25d366;
-      color: white;
-      text-decoration: none;
-      padding: 8px 12px;
-      border-radius: 8px;
-      font-size: 13px;
-      font-weight: 500;
-    }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(15px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
   </style>
 </head>
 <body>
   <header>
     <div class="logo">DP</div>
-    <h1>Messages — DitPay Market</h1>
+    <h1>About DitPay Market</h1>
     <div></div>
   </header>
 
-  <div class="chat-container">
-    <div class="messages">
-      <div class="msg me">
-        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&q=60" alt="Me">
-        <div class="bubble">Hello, is the iPhone still available?</div>
-      </div>
-      <div class="msg you">
-        <div class="bubble">Hi! Yes, it's still available.</div>
-        <img src="https://images.unsplash.com/photo-1545996124-1b9f77a0f6e4?w=200&q=60" alt="Seller">
-      </div>
-      <div class="msg me">
-        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&q=60" alt="Me">
-        <div class="bubble">Can I see more pictures?</div>
-      </div>
-      <div class="msg you">
-        <div class="bubble">Sure! I’ll send them shortly.</div>
-        <img src="https://images.unsplash.com/photo-1545996124-1b9f77a0f6e4?w=200&q=60" alt="Seller">
-      </div>
-    </div>
+  <main>
+    <h2>About DitPay</h2>
+    <p>At DitPay, our mission is simple: <em>Empower every buyer and seller in Nigeria to trade smart, safe and seamless.</em> We are your trusted digital marketplace — where you can <strong>buy</strong>, <strong>sell</strong> or <strong>discover</strong> goods and services with ease.</p>
 
-    <div class="chat-input">
-      <input type="text" placeholder="Type a message..." />
-      <button><i class="fa fa-paper-plane"></i></button>
-    </div>
-  </div>
+    <h2>What we do</h2>
+    <ul>
+      <li>Provide a vibrant online space where individuals and businesses come together to list, browse and transact items across a wide range of categories.</li>
+      <li>Offer intuitive tools that make posting, negotiating, and discovering a bargain smooth and efficient.</li>
+      <li>Focus on user experience, reliability and trust so you feel confident trading every time.</li>
+    </ul>
 
-  <!-- ✅ Fixed bottom navigation -->
+    <h2>How it works</h2>
+    <h3>For Sellers</h3>
+    <ul>
+      <li>Register quickly with your email or phone number.</li>
+      <li>Upload clear photos and write a detailed description of your item.</li>
+      <li>Set a fair price, publish your ad and monitor responses in real time.</li>
+      <li>Respond promptly to messages and arrange safe meet‑ups or delivery.</li>
+    </ul>
+
+    <h3>For Buyers</h3>
+    <ul>
+      <li>Use search filters to find exactly what you need.</li>
+      <li>Chat directly with sellers, ask questions, negotiate where appropriate.</li>
+      <li>Choose collection in person or delivery, inspect goods before payment.</li>
+      <li>Leave feedback after transaction — your review helps build community trust.</li>
+    </ul>
+
+    <h2>Our promise of safety</h2>
+    <p>We believe trade should be straightforward <strong>and safe</strong>. That’s why we provide verified listings, clear trading guidelines, and 24/7 support for any issues you encounter.</p>
+
+    <h2>Why choose DitPay?</h2>
+    <ul>
+      <li><strong>Local focus, global standard</strong> — We know Nigeria’s market and bring best‑in‑class platform features to you.</li>
+      <li><strong>Wide variety</strong> — Thousands of listings every day across categories and price‑points.</li>
+      <li><strong>User‑driven marketplace</strong> — Real people list real items; no middleman markup.</li>
+      <li><strong>Fast and efficient</strong> — Post a listing and reach potential buyers in hours.</li>
+    </ul>
+
+    <h2>Our vision</h2>
+    <p>We aim to build Nigeria’s go‑to marketplace, where everyone has the chance to sell what they don’t need and buy what they want — at the right price, with the right people.</p>
+
+    <h2>Join us</h2>
+    <p>Whether you’re looking to <strong>sell something today</strong>, <strong>find a bargain</strong>, or <strong>explore new opportunities</strong> — DitPay is here for you. Let’s trade smarter, together.</p>
+  </main>
+
+  <!-- ✅ Bottom Navigation -->
   <nav class="bottom-nav">
     <ul id="bottomNav">
       <li data-page="index.html"><i class="fa fa-home"></i>Home</li>
-      <li class="active" data-page="messages.html"><i class="fa fa-comments"></i>Messages</li>
-      <li data-page="profile.html"><i class="fa fa-user"></i>Profile</li>
+      <li data-page="messages.html"><i class="fa fa-comments"></i>Messages</li>
+      <li class="active" data-page="about_ditpay.html"><i class="fa fa-user"></i>Profile</li>
     </ul>
   </nav>
-
-  <!-- ✅ WhatsApp Floating Toggle + Chat -->
-  <div class="whatsapp-container">
-    <div class="whatsapp-toggle">
-      <i class="fab fa-whatsapp"></i>
-    </div>
-
-    <div class="whatsapp-chat-box" id="waBox">
-      <div class="wa-header">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WA">
-        <div>
-          <h4>DitPay Support</h4>
-          <p>Typically replies within minutes</p>
-        </div>
-      </div>
-      <div class="wa-body">
-        <p>👋 Hi there! Need help with your purchase?</p>
-        <a href="https://wa.me/234XXXXXXXXXX" target="_blank">Chat on WhatsApp</a>
-      </div>
-    </div>
-  </div>
 
   <script>
     // Bottom navigation link behavior
@@ -314,18 +177,8 @@
         navItems.forEach(i => i.classList.remove("active"));
         li.classList.add("active");
         const page = li.getAttribute("data-page");
-        if (page !== "messages.html") window.location.href = page;
+        if (page !== "about_ditpay.html") window.location.href = page;
       });
-    });
-
-    // WhatsApp toggle behavior
-    const toggleBtn = document.querySelector('.whatsapp-toggle');
-    const chatBox = document.getElementById('waBox');
-    let isOpen = false;
-
-    toggleBtn.addEventListener('click', () => {
-      isOpen = !isOpen;
-      chatBox.style.display = isOpen ? 'block' : 'none';
     });
   </script>
 </body>
