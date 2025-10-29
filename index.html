@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ditpay Market Login</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    :root {
+      --dp-primary:#0b3d91;
+      --dp-accent:#f4b400;
+      --bg:#f6f9fb;
+      --card:#ffffff;
+      --muted:#6b7280;
+      --radius:12px;
+      --shadow:0 6px 18px rgba(11,61,145,0.08);
+    }
+
+    *{box-sizing:border-box;}
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system,Segoe UI,Roboto,Arial;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      height:100vh;
+      padding:10px;
+      background: linear-gradient(135deg, var(--dp-primary), var(--dp-accent));
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+    }
+
+    @keyframes gradientShift {
+      0% {background-position:0% 50%;}
+      50% {background-position:100% 50%;}
+      100% {background-position:0% 50%;}
+    }
+
+    .login-container{
+      background:var(--card);
+      padding:40px;
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      width:100%;
+      max-width:400px;
+      text-align:center;
+      position:relative;
+      z-index:1;
+      overflow:hidden;
+    }
+
+    .login-container h2{
+      margin-bottom:25px;
+      color:var(--dp-primary);
+      font-size:24px;
+    }
+
+    .login-container input{
+      width:100%;
+      padding:12px;
+      margin:10px 0;
+      border-radius:var(--radius);
+      border:1px solid #ccc;
+      font-size:16px;
+    }
+
+    .password-field {
+      position: relative;
+    }
+
+    .toggle-password {
+      position: absolute;
+      top: 50%;
+      right: 12px;
+      transform: translateY(-50%);
+      cursor: pointer;
+      color: var(--muted);
+    }
+
+    .login-container button{
+      width:100%;
+      padding:12px;
+      margin-top:20px;
+      border:none;
+      border-radius:var(--radius);
+      background:linear-gradient(135deg,var(--dp-primary),var(--dp-accent));
+      color:white;
+      font-size:16px;
+      cursor:pointer;
+      transition:0.3s;
+    }
+
+    .login-container button:hover{
+      opacity:0.9;
+    }
+
+    .login-container a{
+      display:block;
+      margin-top:15px;
+      color:var(--dp-primary);
+      text-decoration:none;
+      font-size:14px;
+    }
+
+    .login-container a:hover{
+      text-decoration:underline;
+    }
+
+    .logo-circle{
+      width:60px;
+      height:60px;
+      border-radius:14px;
+      background:linear-gradient(135deg,var(--dp-primary),var(--dp-accent));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:white;
+      font-weight:700;
+      font-size:20px;
+      margin:0 auto 20px auto;
+      box-shadow:var(--shadow);
+    }
+
+    .signup-btn{
+      margin-top:12px;
+      background:var(--card);
+      color:var(--dp-primary);
+      border:2px solid var(--dp-primary);
+      font-weight:600;
+      padding:12px;
+      border-radius:var(--radius);
+      font-size:16px;
+      cursor:pointer;
+      transition:0.3s;
+    }
+
+    .signup-btn:hover{
+      background:linear-gradient(135deg,var(--dp-primary),var(--dp-accent));
+      color:white;
+    }
+
+    /* Success Animation */
+    .success-popup {
+      position:absolute;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      background:rgba(255,255,255,0.95);
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      opacity:0;
+      pointer-events:none;
+      transition:0.5s ease;
+    }
+
+    .success-popup.active {
+      opacity:1;
+      pointer-events:auto;
+    }
+
+    .success-popup i {
+      font-size:50px;
+      color:var(--dp-accent);
+      margin-bottom:10px;
+      animation:pop 0.6s ease;
+    }
+
+    .success-popup h3 {
+      color:var(--dp-primary);
+      font-size:22px;
+      margin:0;
+    }
+
+    @keyframes pop {
+      0%{transform:scale(0);}
+      80%{transform:scale(1.2);}
+      100%{transform:scale(1);}
+    }
+
+    /* Mobile Responsive */
+    @media (max-width:480px){
+      .login-container{
+        padding:30px 20px;
+      }
+      .login-container h2{
+        font-size:22px;
+      }
+      .login-container input,
+      .login-container button,
+      .signup-btn{
+        font-size:15px;
+        padding:10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <div class="logo-circle">DP</div>
+    <h2>Ditpay Market Login</h2>
+    <form id="loginForm">
+      <input type="text" name="username" placeholder="Username" required>
+      <div class="password-field">
+        <input type="password" id="password" name="password" placeholder="Password" required>
+        <i class="fa-solid fa-eye toggle-password" id="togglePassword"></i>
+      </div>
+      <button type="submit">Login</button>
+    </form>
+    <a href="#">Forgot password?</a>
+    <form action="/signup" method="GET">
+      <button type="submit" class="signup-btn">Sign Up</button>
+    </form>
+
+    <!-- Success Animation Popup -->
+    <div class="success-popup" id="successPopup">
+      <i class="fa-solid fa-circle-check"></i>
+      <h3>Login Successful!</h3>
+    </div>
+  </div>
+
+  <script>
+    // Show/Hide Password
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordInput = document.getElementById('password');
+    togglePassword.addEventListener('click', () => {
+      const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+      passwordInput.setAttribute('type', type);
+      togglePassword.classList.toggle('fa-eye');
+      togglePassword.classList.toggle('fa-eye-slash');
+    });
+
+    // Fake Login Success Animation
+    const loginForm = document.getElementById('loginForm');
+    const successPopup = document.getElementById('successPopup');
+
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      successPopup.classList.add('active');
+      setTimeout(() => {
+        successPopup.classList.remove('active');
+        // Redirect (optional)
+        // window.location.href = '/dashboard';
+      }, 2500);
+    });
+  </script>
+</body>
+</html>
