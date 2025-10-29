@@ -251,8 +251,8 @@
           setTimeout(() => {
             successPopup.classList.remove('active');
             signupForm.reset();
-            // window.location.href = '/index';
-          }, 2500);
+            window.location.href = '/login.html'; // ✅ Redirect to login page
+          }, 2000);
         } else {
           alert(result.message || 'Signup failed. Please try again.');
         }
