@@ -14,7 +14,7 @@
       --card:#ffffff;  
       --muted:#6b7280;  
       --radius:12px;  
-      --shadow: 0 6px 18px rgba(11,61,145,0.08);  
+      --shadow:0 6px 18px rgba(11,61,145,0.08);  
       --maxw:1200px;  
     }  
     *{box-sizing:border-box}  
@@ -36,7 +36,7 @@ header{display:flex;align-items:center;gap:16px;justify-content:space-between;ma
 .grid-layout{display:grid;grid-template-columns:240px 1fr;gap:18px;align-items:start}  
 aside{background:var(--card);padding:14px;border-radius:12px;box-shadow:var(--shadow)}  
 
-/* Categories row (top of results) */  
+/* Categories row */  
 .cat-row{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}  
 .cat{background:linear-gradient(180deg,rgba(255,255,255,0.9),#fff);padding:8px 12px;border-radius:999px;border:1px solid rgba(0,0,0,0.04);cursor:pointer;font-size:14px;color:var(--muted)}  
 
@@ -44,7 +44,6 @@ aside{background:var(--card);padding:14px;border-radius:12px;box-shadow:var(--sh
 .results-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}  
 .results-count{color:var(--muted);font-size:14px}  
 .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}  
-
 .card{background:var(--card);border-radius:12px;overflow:hidden;box-shadow:var(--shadow);cursor:pointer;display:flex;flex-direction:column}  
 .card .img{height:170px;background:#eef6fb;overflow:hidden}  
 .card img{width:100%;height:100%;object-fit:cover;display:block}  
@@ -52,7 +51,6 @@ aside{background:var(--card);padding:14px;border-radius:12px;box-shadow:var(--sh
 .price{color:var(--dp-primary);font-weight:700;font-size:16px}  
 .title{font-weight:600}  
 .meta{display:flex;justify-content:space-between;color:var(--muted);font-size:13px}  
-
 .seller{display:flex;align-items:center;gap:8px;margin-top:auto}  
 .seller img{width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,0.06)}  
 .details-btn{background:var(--dp-accent);border:0;color:#0b2140;padding:8px 10px;border-radius:8px;cursor:pointer;font-weight:600;margin-left:auto}  
@@ -67,44 +65,43 @@ aside{background:var(--card);padding:14px;border-radius:12px;box-shadow:var(--sh
   .bottom-nav{display:flex}  
 }  
 
-/* Bottom nav — always visible like Jiji */
-
-.bottom-nav{
-display:flex;
-position:fixed;
-left:0;
-right:0;
-bottom:0;
-background:var(--card);
-box-shadow:0 -6px 18px rgba(0,0,0,0.06);
-padding:8px 12px;
-border-top-left-radius:12px;
-border-top-right-radius:12px;
-z-index:60;
-}
-.bottom-nav ul{
-display:flex;
-justify-content:space-around; /* evenly space all items */
-align-items:center;
-width:100%;
-margin:0;
-padding:0;
-list-style:none;
-}
-.bottom-nav li{
-flex:1;
-text-align:center;
-color:var(--muted);
-font-size:13px;
-cursor:pointer;
-}
-.bottom-nav li.active{
-color:var(--dp-primary);
-}
-.bottom-nav i{
-font-size:18px;
-display:block;
-margin-bottom:4px;
+/* Bottom nav */  
+.bottom-nav{  
+  display:flex;  
+  position:fixed;  
+  left:0;  
+  right:0;  
+  bottom:0;  
+  background:var(--card);  
+  box-shadow:0 -6px 18px rgba(0,0,0,0.06);  
+  padding:8px 12px;  
+  border-top-left-radius:12px;  
+  border-top-right-radius:12px;  
+  z-index:60;  
+}  
+.bottom-nav ul{  
+  display:flex;  
+  justify-content:space-around;  
+  align-items:center;  
+  width:100%;  
+  margin:0;  
+  padding:0;  
+  list-style:none;  
+}  
+.bottom-nav li{  
+  flex:1;  
+  text-align:center;  
+  color:var(--muted);  
+  font-size:13px;  
+  cursor:pointer;  
+}  
+.bottom-nav li.active{  
+  color:var(--dp-primary);  
+}  
+.bottom-nav i{  
+  font-size:18px;  
+  display:block;  
+  margin-bottom:4px;  
 }
 
   </style>  
@@ -114,12 +111,21 @@ margin-bottom:4px;
     <header>  
       <div class="brand">  
         <div class="logo">DP</div>  
-        <div><h1>DitPay Market</h1><div style="font-size:13px;color:var(--muted)">Buy & sell in your city</div></div>  
+        <div>  
+          <h1>DitPay Market</h1>  
+          <div style="font-size:13px;color:var(--muted)">Buy & sell in your city</div>  
+        </div>  
       </div>  
       <div class="top-actions" style="width:55%">  
         <div class="search-bar" role="search">  
           <input id="searchInput" placeholder="Search items, e.g. iPhone, motorcycle..." aria-label="Search" />  
-          <select id="catSelect"><option value="all">All categories</option><option value="electronics">Electronics</option><option value="vehicles">Vehicles</option><option value="property">Property</option><option value="services">Services</option></select>  
+          <select id="catSelect">  
+            <option value="all">All categories</option>  
+            <option value="electronics">Electronics</option>  
+            <option value="vehicles">Vehicles</option>  
+            <option value="property">Property</option>  
+            <option value="services">Services</option>  
+          </select>  
           <button id="searchBtn" class="search-btn"><i class="fa fa-search"></i></button>  
         </div>  
       </div>  
@@ -134,14 +140,23 @@ margin-bottom:4px;
       <div class="cat cond">New</div><div class="cat cond">Used</div><div class="cat cond">Refurbished</div>  
     </div>  
     <h4>Price</h4>  
-    <div style="display:flex;gap:8px;margin-bottom:8px"><input id="minPrice" type="number" placeholder="Min" style="flex:1;padding:8px;border-radius:8px;border:1px solid #e9eef0"/><input id="maxPrice" type="number" placeholder="Max" style="flex:1;padding:8px;border-radius:8px;border:1px solid #e9eef0"/></div>  
+    <div style="display:flex;gap:8px;margin-bottom:8px">  
+      <input id="minPrice" type="number" placeholder="Min" style="flex:1;padding:8px;border-radius:8px;border:1px solid #e9eef0"/>  
+      <input id="maxPrice" type="number" placeholder="Max" style="flex:1;padding:8px;border-radius:8px;border:1px solid #e9eef0"/>  
+    </div>  
     <button id="applyFilters" class="details-btn" style="width:100%;background:var(--dp-primary);color:white">Apply filters</button>  
   </aside>  
 
   <main>  
     <div class="results-head">  
       <div class="results-count"><span id="resultsCount">0</span> results</div>  
-      <div style="display:flex;gap:8px;align-items:center"><select id="sort"><option value="newest">Newest</option><option value="price-asc">Price: low → high</option><option value="price-desc">Price: high → low</option></select></div>  
+      <div style="display:flex;gap:8px;align-items:center">  
+        <select id="sort">  
+          <option value="newest">Newest</option>  
+          <option value="price-asc">Price: low → high</option>  
+          <option value="price-desc">Price: high → low</option>  
+        </select>  
+      </div>  
     </div>  
 
     <div class="cat-row">  
@@ -155,25 +170,25 @@ margin-bottom:4px;
   </main>  
 </div>
 
-  </div>    <nav class="bottom-nav">  
-    <ul>  
-      <li class="active"><i class="fa fa-home"></i>Home</li>  
-      <li><i class="fa fa-search"></i>Search</li>  
-      <li><i class="fa fa-plus-circle"></i>Post</li>  
-      <li onclick="window.location.href='messages.html'">  
-  <i class="fa fa-comments"></i>  
-  <span>Messages</span>  
+  </div>    <!-- ✅ Bottom Navigation -->    <nav class="bottom-nav">  
+    <ul id="bottomNav">  
+      <li class="active" data-action="home">  
+        <i class="fa fa-home"></i>Home  
       </li>  
-      <li onclick="window.location.href='profile.html'">  
-  <i class="fa fa-user"></i>Profile  
-      </li>  </ul>
-
+      <li data-action="about">  
+        <i class="fa fa-info-circle"></i>About  
+      </li>  
+      <li data-action="messages">  
+        <i class="fa fa-comments"></i><span>Messages</span>  
+      </li>  
+      <li data-action="profile">  
+        <i class="fa fa-user"></i>Profile  
+      </li>  
+    </ul>  
   </nav>    <script>  
-    // Sample dataset with sellers and images  
+    // === Sample Data ===  
     const DATA = [  
       {id:1,title:'iPhone 13 Pro Max - 256GB',price:720000,cat:'electronics',city:'Lagos',seller:'Grace Phones',sellerImg:'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&q=60',img:'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1200&q=60',desc:'Excellent condition, battery 90%.'},  
-      {id:2,title:'Yamaha YBR 125 - 2018',price:430000,cat:'vehicles',city:'Abuja',seller:'RideOn NG',sellerImg:'https://images.unsplash.com/photo-1545996124-1b9f77a0f6e4?w=200&q=60',img:'https://images.unsplash.com/photo-1517821099600-5d7c3b3b2df4?w=1200&q=60',desc:'Well maintained, single owner.'},  
-      {id:3,title:'2-bedroom flat, Lekki',price:28000000,cat:'property',city:'Lagos',seller:'HomeSpace',sellerImg:'https://images.unsplash.com/photo-1545996124-1b9f77a0f6e4?w=200&q=60',img:'https://images.unsplash.com/photo-1572120360610-d971b9b0c0f3?w=1200&q=60',desc:'Near shopping mall.'},  
       {id:4,title:'MacBook Pro 2020 - 16GB',price:520000,cat:'electronics',city:'Ibadan',seller:'TechHub Gadgets',sellerImg:'https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=200&q=60',img:'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=1200&q=60',desc:'Lightly used, like new.'},  
       {id:5,title:'Samsung Galaxy A54',price:98000,cat:'electronics',city:'Lagos',seller:'SmartHome NG',sellerImg:'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&q=60',img:'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=1200&q=60',desc:'Box & accessories included.'},  
       {id:6,title:'Cleaning service - weekly',price:15000,cat:'services',city:'Port Harcourt',seller:'CleanPros',sellerImg:'https://images.unsplash.com/photo-1545996124-1b9f77a0f6e4?w=200&q=60',img:'https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=1200&q=60',desc:'Professional team.'}  
@@ -212,33 +227,27 @@ margin-bottom:4px;
         `;  
         // make whole card clickable  
         card.addEventListener('click', (e)=>{  
-          // prevent click from View Details button duplicating navigation  
           if(e.target.closest('.details-btn')) return;  
           window.location.href = 'product.html?id=' + i.id;  
         });  
-        // details button  
-        setTimeout(()=>{  
-          const btn = card.querySelector('.details-btn');  
-          btn.addEventListener('click',(ev)=>{  
-            ev.stopPropagation();  
-            window.location.href = 'product.html?id=' + i.id;  
-          });  
-        },0);  
+        const btn = card.querySelector('.details-btn');  
+        btn.addEventListener('click',(ev)=>{  
+          ev.stopPropagation();  
+          window.location.href = 'product.html?id=' + i.id;  
+        });  
         cardsEl.appendChild(card);  
       });  
     }  
   
-    // initial render  
     render(items);  
   
-    // search/filter logic  
+    // === Search and Filters ===  
     const searchInput = document.getElementById('searchInput');  
     const searchBtn = document.getElementById('searchBtn');  
     const catSelect = document.getElementById('catSelect');  
     const minPrice = document.getElementById('minPrice');  
     const maxPrice = document.getElementById('maxPrice');  
     const applyFilters = document.getElementById('applyFilters');  
-    const cats = document.querySelectorAll('.cat-row .cat');  
   
     function applySearchAndFilters(){  
       const q = (searchInput.value || '').toLowerCase();  
@@ -267,12 +276,36 @@ margin-bottom:4px;
       render(items);  
     });  
   
-    // clickable quick categories  
+    // === Category Quick Filters ===  
     document.querySelectorAll('.cat[data-cat]').forEach(el=>el.addEventListener('click', ()=>{  
       catSelect.value = el.dataset.cat;  
       applySearchAndFilters();  
       window.scrollTo({top:200,behavior:'smooth'});  
     }));  
   
+    // === Bottom Navigation Logic ===  
+    const navItems = document.querySelectorAll('#bottomNav li');  
+    navItems.forEach(item => {  
+      item.addEventListener('click', () => {  
+        navItems.forEach(i => i.classList.remove('active'));  
+        item.classList.add('active');  
+        const action = item.dataset.action;  
+  
+        switch (action) {  
+          case 'home':  
+            window.location.href = 'index.html';  
+            break;  
+          case 'about':  
+            window.location.href = 'about.html';  
+            break;  
+          case 'messages':  
+            window.location.href = 'messages.html';  
+            break;  
+          case 'profile':  
+            window.location.href = 'profile.html';  
+            break;  
+        }  
+      });  
+    });  
   </script>  </body>  
-  </html>
+</html>
