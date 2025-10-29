@@ -222,7 +222,7 @@
   </div>
 
   <script>
-    // Show/Hide Password
+    // Toggle Password Visibility
     const togglePassword = document.getElementById('togglePassword');
     const passwordInput = document.getElementById('password');
     togglePassword.addEventListener('click', () => {
@@ -232,17 +232,46 @@
       togglePassword.classList.toggle('fa-eye-slash');
     });
 
-    // Fake Login Success Animation
+    // Login Form Handler
     const loginForm = document.getElementById('loginForm');
     const successPopup = document.getElementById('successPopup');
 
-    loginForm.addEventListener('submit', (e) => {
+    loginForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      successPopup.classList.add('active');
-      setTimeout(() => {
-        successPopup.classList.remove('active');
-        window.location.href = '/login.html'; // ✅ Redirect route after successful login
-      }, 2500);
+
+      const username = loginForm.username.value.trim();
+      const password = loginForm.password.value.trim();
+
+      try {
+        const res = await fetch("/api/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username, password }),
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          alert(data.message || "Login failed. Please try again.");
+          return;
+        }
+
+        // ✅ Show success animation
+        successPopup.classList.add('active');
+
+        // Save JWT token for future authenticated requests
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("username", data.user.username);
+
+        setTimeout(() => {
+          successPopup.classList.remove('active');
+          window.location.href = "/index.html"; // redirect page after success
+        }, 2500);
+
+      } catch (err) {
+        console.error("Login error:", err);
+        alert("Server error. Please try again later.");
+      }
     });
   </script>
 </body>
