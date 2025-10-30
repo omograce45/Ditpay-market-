@@ -145,7 +145,7 @@
       }
     }
 
-    function addPost() {
+    async function addPost() {
       const title = document.getElementById('title').value.trim();
       const price = document.getElementById('price').value.trim();
       const category = document.getElementById('category').value;
@@ -159,17 +159,27 @@
         return;
       }
 
-      const post = { title, price, category, city, seller, image, desc, date: new Date().toISOString() };
+      const post = { title, price, category, city, seller, image, description: desc };
 
-      const posts = JSON.parse(localStorage.getItem("ditpay_posts") || "[]");
-      posts.push(post);
-      localStorage.setItem("ditpay_posts", JSON.stringify(posts));
+      try {
+        const res = await fetch('https://your-backend-url.com/api/posts', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(post)
+        });
 
-      const msg = document.getElementById('successMsg');
-      msg.style.display = 'block';
-      setTimeout(() => msg.style.display = 'none', 2500);
-
-      document.querySelectorAll('#formContainer input, #formContainer textarea').forEach(i => i.value = "");
+        if (res.ok) {
+          const msg = document.getElementById('successMsg');
+          msg.style.display = 'block';
+          setTimeout(() => msg.style.display = 'none', 2500);
+          document.querySelectorAll('#formContainer input, #formContainer textarea').forEach(i => i.value = "");
+        } else {
+          alert("Server error. Please try again later.");
+        }
+      } catch (err) {
+        console.error(err);
+        alert("Network error. Please check your connection.");
+      }
     }
   </script>
 </body>
