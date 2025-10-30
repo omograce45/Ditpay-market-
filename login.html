@@ -56,44 +56,47 @@
       flex-wrap:wrap;
     }  
 
-    /* Logout button */
-    .logout-btn{  
-      background:var(--dp-primary);  
-      color:white;  
-      border:0;  
-      padding:10px 16px;  
-      border-radius:10px;  
-      cursor:pointer;  
-      font-weight:600;  
-      display:flex;  
-      align-items:center;  
-      gap:6px;  
-      box-shadow:var(--shadow);  
-    }  
-    .logout-btn i{font-size:15px;}  
+    /* Keep header items (brand + logout) on one line, even on small screens */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
 
-    /* ✅ Keep Logout inline with brand */
-    .header-right {
-      display:flex;
-      align-items:center;
-      gap:16px;
-    }
+/* Logout button */
+.logout-btn {  
+  background: var(--dp-primary);  
+  color: white;  
+  border: 0;  
+  padding: 10px 16px;  
+  border-radius: 10px;  
+  cursor: pointer;  
+  font-weight: 600;  
+  display: flex;  
+  align-items: center;  
+  gap: 6px;  
+  box-shadow: var(--shadow);  
+}  
 
-    @media (max-width: 768px) {
-      header {
-        flex-direction:column;
-        align-items:stretch;
-      }
-      .header-right {
-        width:100%;
-        justify-content:space-between;
-      }
-      .logout-btn {
-        padding:8px 12px;
-        font-size:14px;
-      }
-    }
+.logout-btn i { font-size: 15px; }  
 
+/* ✅ Adjust sizing on smaller screens */
+@media (max-width: 600px) {
+  .logout-btn {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+
+  .brand h1 {
+    font-size: 16px;
+  }
+
+  .brand div[style] {
+    font-size: 12px !important;
+  }
+}
+ 
     /* Search */  
     .search-bar{display:flex;gap:10px;background:var(--card);padding:10px;border-radius:12px;box-shadow:var(--shadow);align-items:center;width:100%}  
     .search-bar input{flex:1;border:0;outline:0;padding:8px;font-size:15px}  
