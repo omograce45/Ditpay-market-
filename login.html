@@ -270,7 +270,7 @@ header {
 // === Fetch from backend first ===
 async function loadPosts() {
   try {
-    const res = await fetch('https://ditpay-market.up.railway.app/get-posts');
+    const res = await fetch('https://dittpay-market.onrender.com/api/post');
     const data = await res.json();
 
     if (Array.isArray(data) && data.length > 0) {
