@@ -264,104 +264,135 @@ header {
         <i class="fa fa-user"></i>Profile  
       </li>  
     </ul>  
-  </nav>    <script>  
-    // === Sample Data ===  
-    const DATA = [  
-      {id:1,title:'iPhone 13 Pro Max - 256GB',price:720000,cat:'electronics',city:'Lagos',seller:'Grace Phones',sellerImg:'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&q=60',img:'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1200&q=60',desc:'Excellent condition, battery 90%.'},  
-      {id:4,title:'MacBook Pro 2020 - 16GB',price:520000,cat:'electronics',city:'Ibadan',seller:'TechHub Gadgets',sellerImg:'https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=200&q=60',img:'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=1200&q=60',desc:'Lightly used, like new.'},  
-      {id:5,title:'Samsung Galaxy A54',price:98000,cat:'electronics',city:'Lagos',seller:'SmartHome NG',sellerImg:'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&q=60',img:'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=1200&q=60',desc:'Box & accessories included.'},  
-      {id:6,title:'Cleaning service - weekly',price:15000,cat:'services',city:'Port Harcourt',seller:'CleanPros',sellerImg:'https://images.unsplash.com/photo-1545996124-1b9f77a0f6e4?w=200&q=60',img:'https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=1200&q=60',desc:'Professional team.'}  
-    ];  
-  
-    const cardsEl = document.getElementById('cards');  
-    const resultsCount = document.getElementById('resultsCount');  
-    let items = [...DATA];  
-  
-    function numberWithCommas(x){return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g,',')}  
-  
-    function render(list){  
-      cardsEl.innerHTML='';  
-      if(list.length===0){ cardsEl.innerHTML='<div style="padding:24px;color:var(--muted)">No items found.</div>'; resultsCount.textContent=0; return; }  
-      resultsCount.textContent = list.length;  
-      list.forEach(i=>{  
-        const card = document.createElement('article');  
-        card.className='card';  
-        card.innerHTML = `  
-          <div class="img"><img src="${i.img}" alt="${i.title}"></div>  
-          <div class="body">  
-            <div style="display:flex;justify-content:space-between;align-items:start;gap:10px">  
-              <div style="flex:1">  
-                <div class="title">${i.title}</div>  
-                <div class="price">₦${numberWithCommas(i.price)}</div>  
-              </div>  
-              <div style="text-align:right;color:var(--muted);font-size:13px">${i.city}</div>  
-            </div>  
-            <div class="meta">${i.desc}</div>  
-            <div class="seller">  
-              <div style="display:flex;flex-direction:column"><small style="color:var(--muted);font-size:12px">Seller</small><strong>${i.seller}</strong></div>  
-              <img src="${i.sellerImg}" alt="${i.seller}"/>  
-              <button class="details-btn" data-id="${i.id}">View Details</button>  
-            </div>  
-          </div>  
-        `;  
-        // make whole card clickable  
-        card.addEventListener('click', (e)=>{  
-          if(e.target.closest('.details-btn')) return;  
-          window.location.href = 'product.html?id=' + i.id;  
-        });  
-        const btn = card.querySelector('.details-btn');  
-        btn.addEventListener('click',(ev)=>{  
-          ev.stopPropagation();  
-          window.location.href = 'product.html?id=' + i.id;  
-        });  
-        cardsEl.appendChild(card);  
-      });  
-    }  
-  
-    render(items);  
-  
-    // === Search and Filters ===  
-    const searchInput = document.getElementById('searchInput');  
-    const searchBtn = document.getElementById('searchBtn');  
-    const catSelect = document.getElementById('catSelect');  
-    const minPrice = document.getElementById('minPrice');  
-    const maxPrice = document.getElementById('maxPrice');  
-    const applyFilters = document.getElementById('applyFilters');  
-  
-    function applySearchAndFilters(){  
-      const q = (searchInput.value || '').toLowerCase();  
-      const cat = (catSelect.value || 'all');  
-      const min = Number(minPrice.value) || 0;  
-      const max = Number(maxPrice.value) || Infinity;  
-      let filtered = DATA.filter(item=>{  
-        const matchesQ = item.title.toLowerCase().includes(q) || item.seller.toLowerCase().includes(q) || item.city.toLowerCase().includes(q);  
-        const matchesCat = cat==='all' || item.cat===cat;  
-        const matchesPrice = item.price >= min && item.price <= max;  
-        return matchesQ && matchesCat && matchesPrice;  
-      });  
-      items = filtered;  
-      render(items);  
-    }  
-  
-    searchBtn.addEventListener('click', applySearchAndFilters);  
-    searchInput.addEventListener('keydown',(e)=>{ if(e.key==='Enter') applySearchAndFilters(); });  
-    applyFilters.addEventListener('click', applySearchAndFilters);  
-    catSelect.addEventListener('change', applySearchAndFilters);  
-    document.getElementById('sort').addEventListener('change', ()=>{  
-      const v = document.getElementById('sort').value;  
-      if(v==='price-asc') items.sort((a,b)=>a.price-b.price);  
-      else if(v==='price-desc') items.sort((a,b)=>b.price-a.price);  
-      else items.sort((a,b)=>b.id-a.id);  
-      render(items);  
-    });  
-  
-    // === Category Quick Filters ===  
-    document.querySelectorAll('.cat[data-cat]').forEach(el=>el.addEventListener('click', ()=>{  
-      catSelect.value = el.dataset.cat;  
-      applySearchAndFilters();  
-      window.scrollTo({top:200,behavior:'smooth'});  
-    }));  
+  </nav>   
+  <script>  
+    
+// === Fetch from backend first ===
+async function loadPosts() {
+  try {
+    const res = await fetch('https://ditpay-market.up.railway.app/get-posts');
+    const data = await res.json();
 
+    if (Array.isArray(data) && data.length > 0) {
+      // If backend has data, replace sample data with it
+      DATA = data.map(p => ({
+        id: p.id,
+        title: p.title,
+        price: p.price,
+        cat: p.category,
+        city: p.city,
+        seller: p.username,
+        sellerImg: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&q=60',
+        img: p.image || 'https://via.placeholder.com/400',
+        desc: p.description
+      }));
+    }
+    render(DATA);
+  } catch (err) {
+    console.error('Error loading posts:', err);
+    render(DATA); // fallback to sample data
+  }
+}
+
+// === Sample Data ===  
+let DATA = [  
+  {id:1,title:'iPhone 13 Pro Max - 256GB',price:720000,cat:'electronics',city:'Lagos',seller:'Grace Phones',sellerImg:'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&q=60',img:'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1200&q=60',desc:'Excellent condition, battery 90%.'},  
+  {id:4,title:'MacBook Pro 2020 - 16GB',price:520000,cat:'electronics',city:'Ibadan',seller:'TechHub Gadgets',sellerImg:'https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=200&q=60',img:'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=1200&q=60',desc:'Lightly used, like new.'},  
+  {id:5,title:'Samsung Galaxy A54',price:98000,cat:'electronics',city:'Lagos',seller:'SmartHome NG',sellerImg:'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&q=60',img:'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=1200&q=60',desc:'Box & accessories included.'},  
+  {id:6,title:'Cleaning service - weekly',price:15000,cat:'services',city:'Port Harcourt',seller:'CleanPros',sellerImg:'https://images.unsplash.com/photo-1545996124-1b9f77a0f6e4?w=200&q=60',img:'https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=1200&q=60',desc:'Professional team.'}  
+];  
+  
+const cardsEl = document.getElementById('cards');  
+const resultsCount = document.getElementById('resultsCount');  
+let items = [...DATA];  
+  
+function numberWithCommas(x){return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g,',')}  
+  
+function render(list){  
+  cardsEl.innerHTML='';  
+  if(list.length===0){ cardsEl.innerHTML='<div style="padding:24px;color:var(--muted)">No items found.</div>'; resultsCount.textContent=0; return; }  
+  resultsCount.textContent = list.length;  
+  list.forEach(i=>{  
+    const card = document.createElement('article');  
+    card.className='card';  
+    card.innerHTML = `  
+      <div class="img"><img src="${i.img}" alt="${i.title}"></div>  
+      <div class="body">  
+        <div style="display:flex;justify-content:space-between;align-items:start;gap:10px">  
+          <div style="flex:1">  
+            <div class="title">${i.title}</div>  
+            <div class="price">₦${numberWithCommas(i.price)}</div>  
+          </div>  
+          <div style="text-align:right;color:var(--muted);font-size:13px">${i.city}</div>  
+        </div>  
+        <div class="meta">${i.desc}</div>  
+        <div class="seller">  
+          <div style="display:flex;flex-direction:column"><small style="color:var(--muted);font-size:12px">Seller</small><strong>${i.seller}</strong></div>  
+          <img src="${i.sellerImg}" alt="${i.seller}"/>  
+          <button class="details-btn" data-id="${i.id}">View Details</button>  
+        </div>  
+      </div>  
+    `;  
+    // make whole card clickable  
+    card.addEventListener('click', (e)=>{  
+      if(e.target.closest('.details-btn')) return;  
+      window.location.href = 'product.html?id=' + i.id;  
+    });  
+    const btn = card.querySelector('.details-btn');  
+    btn.addEventListener('click',(ev)=>{  
+      ev.stopPropagation();  
+      window.location.href = 'product.html?id=' + i.id;  
+    });  
+    cardsEl.appendChild(card);  
+  });  
+}  
+  
+render(items);  
+  
+// === Search and Filters ===  
+const searchInput = document.getElementById('searchInput');  
+const searchBtn = document.getElementById('searchBtn');  
+const catSelect = document.getElementById('catSelect');  
+const minPrice = document.getElementById('minPrice');  
+const maxPrice = document.getElementById('maxPrice');  
+const applyFilters = document.getElementById('applyFilters');  
+  
+function applySearchAndFilters(){  
+  const q = (searchInput.value || '').toLowerCase();  
+  const cat = (catSelect.value || 'all');  
+  const min = Number(minPrice.value) || 0;  
+  const max = Number(maxPrice.value) || Infinity;  
+  let filtered = DATA.filter(item=>{  
+    const matchesQ = item.title.toLowerCase().includes(q) || item.seller.toLowerCase().includes(q) || item.city.toLowerCase().includes(q);  
+    const matchesCat = cat==='all' || item.cat===cat;  
+    const matchesPrice = item.price >= min && item.price <= max;  
+    return matchesQ && matchesCat && matchesPrice;  
+  });  
+  items = filtered;  
+  render(items);  
+}  
+  
+searchBtn.addEventListener('click', applySearchAndFilters);  
+searchInput.addEventListener('keydown',(e)=>{ if(e.key==='Enter') applySearchAndFilters(); });  
+applyFilters.addEventListener('click', applySearchAndFilters);  
+catSelect.addEventListener('change', applySearchAndFilters);  
+document.getElementById('sort').addEventListener('change', ()=>{  
+  const v = document.getElementById('sort').value;  
+  if(v==='price-asc') items.sort((a,b)=>a.price-b.price);  
+  else if(v==='price-desc') items.sort((a,b)=>b.price-a.price);  
+  else items.sort((a,b)=>b.id-a.id);  
+  render(items);  
+});  
+  
+// === Category Quick Filters ===  
+document.querySelectorAll('.cat[data-cat]').forEach(el=>el.addEventListener('click', ()=>{  
+  catSelect.value = el.dataset.cat;  
+  applySearchAndFilters();  
+  window.scrollTo({top:200,behavior:'smooth'});  
+}));
+
+// === Load posts on startup ===
+loadPosts();
     
     // === Logout Function ===  
     document.getElementById('logoutBtn').addEventListener('click', ()=>{  
