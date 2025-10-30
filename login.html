@@ -40,6 +40,7 @@ header{display:flex;align-items:center;gap:16px;justify-content:space-between;ma
   box-shadow:var(--shadow);  
 }  
 .logout-btn i{font-size:15px;}  
+
 @media (max-width: 768px) {
   .top-actions {
     flex-direction: column;
@@ -48,15 +49,16 @@ header{display:flex;align-items:center;gap:16px;justify-content:space-between;ma
     width: 100%;
   }
 
-  .search-bar {
-    width: 100%;
-  }
-
   .logout-btn {
     align-self: flex-end;
     width: fit-content;
+    order: -1; /* ✅ Moves the logout button ABOVE the search bar */
   }
-}
+
+  .search-bar {
+    width: 100%;
+  }
+}    
     
 /* Search */  
 .search-bar{display:flex;gap:10px;background:var(--card);padding:10px;border-radius:12px;box-shadow:var(--shadow);align-items:center;width:100%}  
