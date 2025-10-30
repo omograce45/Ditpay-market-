@@ -1,5 +1,4 @@
 <!doctype html>
-
 <html lang="en">  
 <head>  
   <meta charset="utf-8" />  
@@ -19,125 +18,159 @@
     }  
     *{box-sizing:border-box}  
     body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;background:var(--bg);color:#0b1220}  
-    .wrap{max-width:var(--maxw);margin:20px auto;padding:0 16px}  /* Header */  
-header{display:flex;align-items:center;gap:16px;justify-content:space-between;margin-bottom:14px}  
-.brand{display:flex;gap:12px;align-items:center}  
-.logo{width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,var(--dp-primary),var(--dp-accent));display:flex;align-items:center;justify-content:center;color:white;font-weight:700;box-shadow:var(--shadow)}  
-.brand h1{margin:0;font-size:18px}  
-.top-actions{display:flex;gap:10px;align-items:center}  
+    .wrap{max-width:var(--maxw);margin:20px auto;padding:0 16px}  
 
-.logout-btn{  
-  background:var(--dp-primary);  
-  color:white;  
-  border:0;  
-  padding:10px 16px;  
-  border-radius:10px;  
-  cursor:pointer;  
-  font-weight:600;  
-  display:flex;  
-  align-items:center;  
-  gap:6px;  
-  box-shadow:var(--shadow);  
-}  
-.logout-btn i{font-size:15px;}  
+    /* Header */
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom:14px;
+      flex-wrap:wrap;
+      gap:10px;
+    }  
+    .brand{
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }  
+    .logo{
+      width:52px;
+      height:52px;
+      border-radius:14px;
+      background:linear-gradient(135deg,var(--dp-primary),var(--dp-accent));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:white;
+      font-weight:700;
+      box-shadow:var(--shadow);
+    }  
+    .brand h1{margin:0;font-size:18px}  
+    .top-actions{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      width:100%;
+      justify-content:space-between;
+      flex-wrap:wrap;
+    }  
 
-@media (max-width: 768px) {
-  .top-actions {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 10px;
-    width: 100%;
-  }
+    /* Logout button */
+    .logout-btn{  
+      background:var(--dp-primary);  
+      color:white;  
+      border:0;  
+      padding:10px 16px;  
+      border-radius:10px;  
+      cursor:pointer;  
+      font-weight:600;  
+      display:flex;  
+      align-items:center;  
+      gap:6px;  
+      box-shadow:var(--shadow);  
+    }  
+    .logout-btn i{font-size:15px;}  
 
-  .logout-btn {
-    align-self: flex-end;
-    width: fit-content;
-    order: -2; /* ✅ Moves the logout button ABOVE the search bar */
-  }
+    /* ✅ Keep Logout inline with brand */
+    .header-right {
+      display:flex;
+      align-items:center;
+      gap:16px;
+    }
 
-  .search-bar {
-    width: 100%;
-  }
-}    
-    
-/* Search */  
-.search-bar{display:flex;gap:10px;background:var(--card);padding:10px;border-radius:12px;box-shadow:var(--shadow);align-items:center;width:100%}  
-.search-bar input{flex:1;border:0;outline:0;padding:8px;font-size:15px}  
-.search-bar select{border:0;background:transparent}  
-.search-btn{background:var(--dp-primary);color:white;border:0;padding:10px 12px;border-radius:10px;cursor:pointer}  
+    @media (max-width: 768px) {
+      header {
+        flex-direction:column;
+        align-items:stretch;
+      }
+      .header-right {
+        width:100%;
+        justify-content:space-between;
+      }
+      .logout-btn {
+        padding:8px 12px;
+        font-size:14px;
+      }
+    }
 
-/* Layout */  
-.grid-layout{display:grid;grid-template-columns:240px 1fr;gap:18px;align-items:start}  
-aside{background:var(--card);padding:14px;border-radius:12px;box-shadow:var(--shadow)}  
+    /* Search */  
+    .search-bar{display:flex;gap:10px;background:var(--card);padding:10px;border-radius:12px;box-shadow:var(--shadow);align-items:center;width:100%}  
+    .search-bar input{flex:1;border:0;outline:0;padding:8px;font-size:15px}  
+    .search-bar select{border:0;background:transparent}  
+    .search-btn{background:var(--dp-primary);color:white;border:0;padding:10px 12px;border-radius:10px;cursor:pointer}  
 
-/* Categories row */  
-.cat-row{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}  
-.cat{background:linear-gradient(180deg,rgba(255,255,255,0.9),#fff);padding:8px 12px;border-radius:999px;border:1px solid rgba(0,0,0,0.04);cursor:pointer;font-size:14px;color:var(--muted)}  
+    /* Layout */  
+    .grid-layout{display:grid;grid-template-columns:240px 1fr;gap:18px;align-items:start}  
+    aside{background:var(--card);padding:14px;border-radius:12px;box-shadow:var(--shadow)}  
 
-/* Products */  
-.results-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}  
-.results-count{color:var(--muted);font-size:14px}  
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}  
-.card{background:var(--card);border-radius:12px;overflow:hidden;box-shadow:var(--shadow);cursor:pointer;display:flex;flex-direction:column}  
-.card .img{height:170px;background:#eef6fb;overflow:hidden}  
-.card img{width:100%;height:100%;object-fit:cover;display:block}  
-.card .body{padding:12px;display:flex;flex-direction:column;gap:8px;flex:1}  
-.price{color:var(--dp-primary);font-weight:700;font-size:16px}  
-.title{font-weight:600}  
-.meta{display:flex;justify-content:space-between;color:var(--muted);font-size:13px}  
-.seller{display:flex;align-items:center;gap:8px;margin-top:auto}  
-.seller img{width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,0.06)}  
-.details-btn{background:var(--dp-accent);border:0;color:#0b2140;padding:8px 10px;border-radius:8px;cursor:pointer;font-weight:600;margin-left:auto}  
+    /* Categories row */  
+    .cat-row{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}  
+    .cat{background:linear-gradient(180deg,rgba(255,255,255,0.9),#fff);padding:8px 12px;border-radius:999px;border:1px solid rgba(0,0,0,0.04);cursor:pointer;font-size:14px;color:var(--muted)}  
 
-/* Responsive */  
-@media (max-width:1000px){.cards{grid-template-columns:repeat(2,1fr)}.grid-layout{grid-template-columns:200px 1fr}}  
-@media (max-width:720px){  
-  header{flex-direction:column;align-items:stretch;gap:10px}  
-  .grid-layout{grid-template-columns:1fr}  
-  aside{order:2;display:none}  
-  .cards{grid-template-columns:1fr}  
-  .bottom-nav{display:flex}  
-}  
+    /* Products */  
+    .results-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}  
+    .results-count{color:var(--muted);font-size:14px}  
+    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}  
+    .card{background:var(--card);border-radius:12px;overflow:hidden;box-shadow:var(--shadow);cursor:pointer;display:flex;flex-direction:column}  
+    .card .img{height:170px;background:#eef6fb;overflow:hidden}  
+    .card img{width:100%;height:100%;object-fit:cover;display:block}  
+    .card .body{padding:12px;display:flex;flex-direction:column;gap:8px;flex:1}  
+    .price{color:var(--dp-primary);font-weight:700;font-size:16px}  
+    .title{font-weight:600}  
+    .meta{display:flex;justify-content:space-between;color:var(--muted);font-size:13px}  
+    .seller{display:flex;align-items:center;gap:8px;margin-top:auto}  
+    .seller img{width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,0.06)}  
+    .details-btn{background:var(--dp-accent);border:0;color:#0b2140;padding:8px 10px;border-radius:8px;cursor:pointer;font-weight:600;margin-left:auto}  
 
-/* Bottom nav */  
-.bottom-nav{  
-  display:flex;  
-  position:fixed;  
-  left:0;  
-  right:0;  
-  bottom:0;  
-  background:var(--card);  
-  box-shadow:0 -6px 18px rgba(0,0,0,0.06);  
-  padding:8px 12px;  
-  border-top-left-radius:12px;  
-  border-top-right-radius:12px;  
-  z-index:60;  
-}  
-.bottom-nav ul{  
-  display:flex;  
-  justify-content:space-around;  
-  align-items:center;  
-  width:100%;  
-  margin:0;  
-  padding:0;  
-  list-style:none;  
-}  
-.bottom-nav li{  
-  flex:1;  
-  text-align:center;  
-  color:var(--muted);  
-  font-size:13px;  
-  cursor:pointer;  
-}  
-.bottom-nav li.active{  
-  color:var(--dp-primary);  
-}  
-.bottom-nav i{  
-  font-size:18px;  
-  display:block;  
-  margin-bottom:4px;  
-}
+    /* Responsive */  
+    @media (max-width:1000px){.cards{grid-template-columns:repeat(2,1fr)}.grid-layout{grid-template-columns:200px 1fr}}  
+    @media (max-width:720px){  
+      header{flex-direction:column;align-items:stretch;gap:10px}  
+      .grid-layout{grid-template-columns:1fr}  
+      aside{order:2;display:none}  
+      .cards{grid-template-columns:1fr}  
+      .bottom-nav{display:flex}  
+    }  
 
+    /* Bottom nav */  
+    .bottom-nav{  
+      display:flex;  
+      position:fixed;  
+      left:0;  
+      right:0;  
+      bottom:0;  
+      background:var(--card);  
+      box-shadow:0 -6px 18px rgba(0,0,0,0.06);  
+      padding:8px 12px;  
+      border-top-left-radius:12px;  
+      border-top-right-radius:12px;  
+      z-index:60;  
+    }  
+    .bottom-nav ul{  
+      display:flex;  
+      justify-content:space-around;  
+      align-items:center;  
+      width:100%;  
+      margin:0;  
+      padding:0;  
+      list-style:none;  
+    }  
+    .bottom-nav li{  
+      flex:1;  
+      text-align:center;  
+      color:var(--muted);  
+      font-size:13px;  
+      cursor:pointer;  
+    }  
+    .bottom-nav li.active{  
+      color:var(--dp-primary);  
+    }  
+    .bottom-nav i{  
+      font-size:18px;  
+      display:block;  
+      margin-bottom:4px;  
+    }  
   </style>  
 </head>  
 <body>  
@@ -150,20 +183,27 @@ aside{background:var(--card);padding:14px;border-radius:12px;box-shadow:var(--sh
           <div style="font-size:13px;color:var(--muted)">Buy & sell in your city</div>  
         </div>  
       </div>  
-      <div class="top-actions" style="width:55%; display:flex; justify-content:space-between; align-items:center;">  
-        <div class="search-bar" role="search">  
-          <input id="searchInput" placeholder="Search items, e.g. iPhone, motorcycle..." aria-label="Search" />  
-          <select id="catSelect">  
-            <option value="all">All categories</option>  
-            <option value="electronics">Electronics</option>  
-            <option value="vehicles">Vehicles</option>  
-            <option value="property">Property</option>  
-            <option value="services">Services</option>  
+
+      <!-- ✅ Logout button now next to brand (same line) -->
+      <div class="header-right">
+        <button id="logoutBtn" class="logout-btn">
+          <i class="fa fa-sign-out-alt"></i>Logout
+        </button>
+      </div>
+    </header>  
+
+    <div class="top-actions">  
+      <div class="search-bar" role="search">  
+        <input id="searchInput" placeholder="Search items, e.g. iPhone, motorcycle..." aria-label="Search" />  
+        <select id="catSelect">  
+          <option value="all">All categories</option>  
+          <option value="electronics">Electronics</option>  
+          <option value="vehicles">Vehicles</option>  
+          <option value="property">Property</option>  
+          <option value="services">Services</option>  
           </select>  
           <button id="searchBtn" class="search-btn"><i class="fa fa-search"></i></button>  
         </div> 
-        <!-- ✅ Logout Button added -->  
-        <button id="logoutBtn" class="logout-btn"><i class="fa fa-sign-out-alt"></i>Logout</button>
       </div>  
     </header>  <div class="grid-layout">  
   <aside>  
