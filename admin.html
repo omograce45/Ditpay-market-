@@ -146,41 +146,53 @@
     }
 
     async function addPost() {
-      const title = document.getElementById('title').value.trim();
-      const price = document.getElementById('price').value.trim();
-      const category = document.getElementById('category').value;
-      const city = document.getElementById('city').value.trim();
-      const seller = document.getElementById('seller').value.trim();
-      const image = document.getElementById('image').value.trim();
-      const desc = document.getElementById('desc').value.trim();
+  const title = document.getElementById('title').value.trim();
+  const price = document.getElementById('price').value.trim();
+  const category = document.getElementById('category').value;
+  const city = document.getElementById('city').value.trim();
+  const seller = document.getElementById('seller').value.trim();
+  const image = document.getElementById('image').value.trim();
+  const desc = document.getElementById('desc').value.trim();
 
-      if (!title || !price || !category || !city || !seller || !image) {
-        alert("Please fill all fields.");
-        return;
-      }
+  if (!title || !price || !category || !city || !seller || !image) {
+    alert("Please fill all fields.");
+    return;
+  }
 
-      const post = { title, price, category, city, seller, image, description: desc };
+  try {
+    const response = await fetch("https://ditpay-market.up.railway.app/add-post", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        title,
+        price,
+        category,
+        city,
+        username: seller,
+        image,
+        description: desc
+      })
+    });
 
-      try {
-        const res = await fetch('https://your-backend-url.com/api/posts', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(post)
-        });
+    if (response.ok) {
+      const msg = document.getElementById('successMsg');
+      msg.style.display = 'block';
+      setTimeout(() => msg.style.display = 'none', 2500);
 
-        if (res.ok) {
-          const msg = document.getElementById('successMsg');
-          msg.style.display = 'block';
-          setTimeout(() => msg.style.display = 'none', 2500);
-          document.querySelectorAll('#formContainer input, #formContainer textarea').forEach(i => i.value = "");
-        } else {
-          alert("Server error. Please try again later.");
-        }
-      } catch (err) {
-        console.error(err);
-        alert("Network error. Please check your connection.");
-      }
+      // Clear inputs
+      document.querySelectorAll('#formContainer input, #formContainer textarea').forEach(i => i.value = "");
+
+      // Save to localStorage as trigger for the index page
+      localStorage.setItem("newPostAdded", "true");
+    } else {
+      alert("Failed to add post. Please try again.");
     }
+  } catch (error) {
+    console.error("Error:", error);
+    alert("Server error, please try again later.");
+  }
+    }
+    
   </script>
 </body>
 </html>
