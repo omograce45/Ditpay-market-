@@ -127,7 +127,9 @@ aside{background:var(--card);padding:14px;border-radius:12px;box-shadow:var(--sh
             <option value="services">Services</option>  
           </select>  
           <button id="searchBtn" class="search-btn"><i class="fa fa-search"></i></button>  
-        </div>  
+        </div> 
+        <!-- ✅ Logout Button added -->  
+        <button id="logoutBtn" class="logout-btn"><i class="fa fa-sign-out-alt"></i>Logout</button>
       </div>  
     </header>  <div class="grid-layout">  
   <aside>  
@@ -282,6 +284,14 @@ aside{background:var(--card);padding:14px;border-radius:12px;box-shadow:var(--sh
       applySearchAndFilters();  
       window.scrollTo({top:200,behavior:'smooth'});  
     }));  
+
+    
+    // === Logout Function ===  
+    document.getElementById('logoutBtn').addEventListener('click', ()=>{  
+      localStorage.removeItem('token');  
+      sessionStorage.clear();  
+      window.location.href = 'index.html';  
+    });  
   
     // === Bottom Navigation Logic ===  
     const navItems = document.querySelectorAll('#bottomNav li');  
