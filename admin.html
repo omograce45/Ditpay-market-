@@ -185,7 +185,9 @@
       // Save to localStorage as trigger for the index page
       localStorage.setItem("newPostAdded", "true");
     } else {
-      alert("Failed to add post. Please try again.");
+     const errData = await response.json();
+console.log("Server response:", errData);
+alert(errData.error || "Failed to add post. Please try again.");
     }
   } catch (error) {
     console.error("Error:", error);
