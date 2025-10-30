@@ -424,6 +424,15 @@ loadPosts();
             break;  
         }  
       });  
-    });  
+    }); 
+    
+    // === Reload posts if a new one was added ===
+window.addEventListener("focus", () => {
+  if (localStorage.getItem("newPostAdded") === "true") {
+    loadPosts(); // fetch fresh posts
+    localStorage.removeItem("newPostAdded");
+  }
+});
+
   </script>  </body>  
 </html>
