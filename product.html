@@ -213,7 +213,12 @@
     if(item.stock > 0){
       stockBox.textContent = `${item.stock} item${item.stock>1?'s':''} available — In stock ✅`;
       stockBox.style.color = "green";
-      belowMsg.textContent = "🎉 This product is currently available. Order yours while stock lasts!";
+      belowMsg.textContent = "🎉 This product is currently available. Order yours while stock lasts!
+        
+        💬 Message:
+        If you’d like to order an item, please visit the message section and contact us using the message icon.
+        We’re always ready to deliver the best products and provide top-quality service.
+        ";
     } else {
       stockBox.textContent = "Out of stock ❌";
       stockBox.style.color = "red";
