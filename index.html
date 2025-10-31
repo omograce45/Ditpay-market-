@@ -28,12 +28,70 @@
       background: linear-gradient(135deg, var(--dp-primary), var(--dp-accent));
       background-size: 400% 400%;
       animation: gradientShift 15s ease infinite;
+      flex-direction: column;
     }
 
     @keyframes gradientShift {
       0% {background-position:0% 50%;}
       50% {background-position:100% 50%;}
       100% {background-position:0% 50%;}
+    }
+
+    /* 🔹 Advert Section with Glow */
+    .advert-section {
+      text-align: center;
+      background: var(--card);
+      color: var(--dp-primary);
+      padding: 15px 20px;
+      border-radius: var(--radius);
+      box-shadow: 0 0 15px rgba(11, 61, 145, 0.3);
+      width: 100%;
+      max-width: 420px;
+      margin-bottom: 20px;
+      animation: glowPulse 3s infinite ease-in-out;
+    }
+
+    @keyframes glowPulse {
+      0%, 100% { box-shadow: 0 0 10px rgba(11,61,145,0.4), 0 0 20px rgba(244,180,0,0.3); }
+      50% { box-shadow: 0 0 25px rgba(11,61,145,0.6), 0 0 35px rgba(244,180,0,0.5); }
+    }
+
+    .advert-section h3 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .advert-section a {
+      display: inline-block;
+      margin-top: 8px;
+      color: var(--dp-accent);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+    }
+
+    .advert-section a:hover {
+      text-decoration: underline;
+    }
+
+    .advert-section .whatsapp {
+      display: inline-block;
+      margin-top: 10px;
+      background: #25d366;
+      color: white;
+      padding: 8px 15px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 600;
+      transition: 0.3s;
+      box-shadow: 0 0 12px rgba(37,211,102,0.4);
+    }
+
+    .advert-section .whatsapp:hover {
+      background: #1ebc59;
+      box-shadow: 0 0 18px rgba(37,211,102,0.6);
     }
 
     .login-container{
@@ -182,6 +240,11 @@
 
     /* Mobile Responsive */
     @media (max-width:480px){
+      .advert-section {
+        max-width: 95%;
+        font-size: 15px;
+        padding: 12px;
+      }
       .login-container{
         padding:30px 20px;
       }
@@ -198,6 +261,13 @@
   </style>
 </head>
 <body>
+  <!-- 🔹 Advert Section with Glow -->
+  <div class="advert-section">
+    <h3>A place where you get cheaper airtime, data and TV subscription service</h3>
+    <a href="https://dittpay.onrender.com/" target="_blank">Visit Our Website</a><br>
+    <a href="https://wa.me/2347012699982" target="_blank" class="whatsapp"><i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp</a>
+  </div>
+
   <div class="login-container">
     <div class="logo-circle">DP</div>
     <h2>Ditpay Market Login</h2>
