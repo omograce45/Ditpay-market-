@@ -18,7 +18,7 @@
       font-family:Inter,system-ui;
       background:var(--bg);
       color:#0b1220;
-      padding-bottom:70px; /* space for nav */
+      padding-bottom:70px;
     }
     .wrap {
       max-width:900px;
@@ -74,8 +74,6 @@
       .card{grid-template-columns:1fr;}
       .gallery img{height:260px;}
     }
-
-    /* 🔹 Bottom Navigation */
     .bottom-nav {
       position:fixed;
       left:0; right:0; bottom:0;
@@ -109,8 +107,6 @@
       display:block;
       margin-bottom:4px;
     }
-
-    /* 🔹 Extra styling for message and stock */
     .message-box {
       background:#e8f0fe;
       border-left:4px solid var(--dp-primary);
@@ -125,13 +121,22 @@
       font-weight:600;
       margin-top:6px;
     }
+    /* ✅ Message under card */
+    .below-card-msg {
+      margin-top:14px;
+      background:#fffbe6;
+      border-left:4px solid orange;
+      padding:10px;
+      border-radius:6px;
+      font-size:14px;
+      color:#8a6d00;
+    }
   </style>
 </head>
 <body>
   <div class="wrap">
     <a href="index.html" class="back"><i class="fa fa-arrow-left"></i> Back to results</a>
 
-    <!-- ✅ Message and stock info -->
     <div class="message-box" id="shortMessage"></div>
 
     <div class="card" id="productCard">
@@ -142,7 +147,6 @@
           <div class="price" id="prodPrice">₦0</div>
           <div class="meta" id="prodCity">Location</div>
           <p id="prodDesc"></p>
-          <!-- ✅ Stock details -->
           <div class="stock-info" id="stockStatus"></div>
         </div>
         <div class="seller">
@@ -154,9 +158,11 @@
         </div>
       </aside>
     </div>
+
+    <!-- ✅ Message under the card -->
+    <div class="below-card-msg" id="belowImgMsg"></div>
   </div>
 
-  <!-- ✅ Bottom Navigation (No Post Button) -->
   <nav class="bottom-nav">
     <ul>
       <li data-page="home"><i class="fa fa-home"></i>Home</li>
@@ -166,73 +172,22 @@
   </nav>
 
   <script>
-    // Product details logic
     let DATA = [  
-  {id:1,title:'iPhone 13 Pro Max - 256GB',price:720000,cat:'electronics',city:'Lagos',seller:'Grace Phones',sellerImg:'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&q=60',img:'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1200&q=60',desc:'Excellent condition, battery 90%.',stock:5},  
-  {id:2,title:'MacBook Pro 2020 - 16GB',price:520000,cat:'electronics',city:'Ibadan',seller:'TechHub Gadgets',sellerImg:'https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=200&q=60',img:'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=1200&q=60',desc:'Lightly used, like new.',stock:2},  
-  {id:3,title:'Samsung Galaxy A54',price:98000,cat:'electronics',city:'Lagos',seller:'SmartHome NG',sellerImg:'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&q=60',img:'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=1200&q=60',desc:'Box & accessories included.',stock:0},
-  {
-    id: 4,
-    title: 'Oraimo 2A Fast Charger',
-    price: 5500,
-    cat: 'electronics',
-    city: 'Lagos',
-    seller: 'TechHub Stores',
-    sellerImg: 'https://images.unsplash.com/photo-1596218416735-7b89b4b8a6b8?w=200&q=60',
-    img: 'https://elghazawy.com/storage/204242/123.webp',
-    desc: 'Original Oraimo charger with fast charging capability. 6 months warranty.',
-    stock:12
-  },
-  {
-    id: 5,
-    title: 'Oraimo FreePods 4',
-    price: 22000,
-    cat: 'electronics',
-    city: 'Benin City',
-    seller: 'Mobile Zone',
-    sellerImg: 'https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=200&q=60',
-    img: 'https://cygroup.ng/wp-content/uploads/2023/12/oeb-e105d_680_.jpg',
-    desc: 'Noise-cancelling Oraimo FreePods 4 with deep bass and long battery life.',
-    stock:8
-  },
-  {
-    id: 6,
-    title: 'Oraimo Type-C Cable - 1m',
-    price: 2500,
-    cat: 'electronics',
-    city: 'Benin city',
-    seller: 'Gadget Plaza',
-    sellerImg: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&q=60',
-    img: 'https://www.technocratng.com/wp-content/uploads/2023/02/ORAIMO-36S-TYPE-C-CABLE.png',
-    desc: 'Durable Oraimo Type-C cable compatible with all Android devices.',
-    stock:4
-  },
-  {
-    id: 7,
-    title: 'Oraimo Power Bank 20000mAh',
-    price: 16500,
-    cat: 'electronics',
-    city: 'Benin City',
-    seller: 'Digital Point',
-    sellerImg: 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=200&q=60',
-    img: 'https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/40/1091052/1.jpg?1774',
-    desc: 'High-capacity Oraimo power bank, supports fast charging with dual output.',
-    stock:10
-  },
-  {
-    id: 8,
-    title: 'AirPods Pro (2nd Gen)',
-    price: 135000,
-    cat: 'electronics',
-    city: 'Benin City',
-    seller: 'Apple Store NG',
-    sellerImg: 'https://images.unsplash.com/photo-1605460375648-278bcbd579a6?w=200&q=60',
-    img: 'https://images.unsplash.com/photo-1632414968156-fa30ab837b70?auto=format&fit=crop&q=80&w=876',
-    desc: 'Brand new Apple AirPods Pro with noise cancellation and wireless charging case.',
-    stock:6
-  },
-  {id:9,title:'Cleaning service - weekly',price:15000,cat:'services',city:'Port Harcourt',seller:'CleanPros',sellerImg:'https://images.unsplash.com/photo-1545996124-1b9f77a0f6e4?w=200&q=60',img:'https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=1200&q=60',desc:'Professional team.',stock:3}  
-];  
+      {id:1,title:'iPhone 13 Pro Max - 256GB',price:720000,cat:'electronics',city:'Lagos',seller:'Grace Phones',sellerImg:'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&q=60',img:'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1200&q=60',desc:'Excellent condition, battery 90%.',stock:5},  
+      {id:2,title:'MacBook Pro 2020 - 16GB',price:520000,cat:'electronics',city:'Ibadan',seller:'TechHub Gadgets',sellerImg:'https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=200&q=60',img:'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=1200&q=60',desc:'Lightly used, like new.',stock:2},  
+      {id:3,title:'Samsung Galaxy A54',price:98000,cat:'electronics',city:'Lagos',seller:'SmartHome NG',sellerImg:'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&q=60',img:'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=1200&q=60',desc:'Box & accessories included.',stock:0},
+      {
+        id:4,title:'Oraimo 2A Fast Charger',price:5500,cat:'electronics',city:'Lagos',seller:'TechHub Stores',
+        sellerImg:'https://images.unsplash.com/photo-1596218416735-7b89b4b8a6b8?w=200&q=60',
+        img:'https://elghazawy.com/storage/204242/123.webp',
+        desc:'Original Oraimo charger with fast charging capability. 6 months warranty.',stock:12
+      },
+      {id:5,title:'Oraimo FreePods 4',price:22000,cat:'electronics',city:'Benin City',seller:'Mobile Zone',sellerImg:'https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=200&q=60',img:'https://cygroup.ng/wp-content/uploads/2023/12/oeb-e105d_680_.jpg',desc:'Noise-cancelling Oraimo FreePods 4 with deep bass and long battery life.',stock:8},
+      {id:6,title:'Oraimo Type-C Cable - 1m',price:2500,cat:'electronics',city:'Benin city',seller:'Gadget Plaza',sellerImg:'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200&q=60',img:'https://www.technocratng.com/wp-content/uploads/2023/02/ORAIMO-36S-TYPE-C-CABLE.png',desc:'Durable Oraimo Type-C cable compatible with all Android devices.',stock:4},
+      {id:7,title:'Oraimo Power Bank 20000mAh',price:16500,cat:'electronics',city:'Benin City',seller:'Digital Point',sellerImg:'https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=200&q=60',img:'https://ng.jumia.is/unsafe/fit-in/500x500/filters:fill(white)/product/40/1091052/1.jpg?1774',desc:'High-capacity Oraimo power bank, supports fast charging with dual output.',stock:10},
+      {id:8,title:'AirPods Pro (2nd Gen)',price:135000,cat:'electronics',city:'Benin City',seller:'Apple Store NG',sellerImg:'https://images.unsplash.com/photo-1605460375648-278bcbd579a6?w=200&q=60',img:'https://images.unsplash.com/photo-1632414968156-fa30ab837b70?auto=format&fit=crop&q=80&w=876',desc:'Brand new Apple AirPods Pro with noise cancellation and wireless charging case.',stock:6},
+      {id:9,title:'Cleaning service - weekly',price:15000,cat:'services',city:'Port Harcourt',seller:'CleanPros',sellerImg:'https://images.unsplash.com/photo-1545996124-1b9f77a0f6e4?w=200&q=60',img:'https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=1200&q=60',desc:'Professional team.',stock:3}  
+    ];  
 
     function getParam(name){
       const url = new URL(window.location.href);
@@ -249,21 +204,22 @@
     document.getElementById('sellerImg').src = item.sellerImg;
     document.getElementById('sellerName').textContent = item.seller;
 
-    // ✅ Show short message + stock info
     const msg = document.getElementById('shortMessage');
     const stockBox = document.getElementById('stockStatus');
     const belowMsg = document.getElementById('belowImgMsg');
+
     msg.textContent = "Thanks for checking this item! See details below 👇";
+
     if(item.stock > 0){
       stockBox.textContent = `${item.stock} item${item.stock>1?'s':''} available — In stock ✅`;
       stockBox.style.color = "green";
+      belowMsg.textContent = "🎉 This product is currently available. Order yours while stock lasts!";
     } else {
       stockBox.textContent = "Out of stock ❌";
       stockBox.style.color = "red";
       belowMsg.textContent = "⚠️ This item is currently out of stock. Please check back soon.";
     }
 
-    // ✅ Navigation Logic
     const navItems = document.querySelectorAll('.bottom-nav li');
     navItems.forEach(item=>{
       item.addEventListener('click',()=>{
@@ -272,7 +228,6 @@
         const page=item.getAttribute('data-page');
         switch(page){
           case 'home': window.location.href='index.html'; break;
-          case 'search': window.location.href='index.html#search'; break;
           case 'messages': window.location.href='messages.html'; break;
           case 'profile': window.location.href='profile.html'; break;
         }
