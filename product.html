@@ -252,6 +252,7 @@
     // ✅ Show short message + stock info
     const msg = document.getElementById('shortMessage');
     const stockBox = document.getElementById('stockStatus');
+    const belowMsg = document.getElementById('belowImgMsg');
     msg.textContent = "Thanks for checking this item! See details below 👇";
     if(item.stock > 0){
       stockBox.textContent = `${item.stock} item${item.stock>1?'s':''} available — In stock ✅`;
@@ -259,6 +260,7 @@
     } else {
       stockBox.textContent = "Out of stock ❌";
       stockBox.style.color = "red";
+      belowMsg.textContent = "⚠️ This item is currently out of stock. Please check back soon.";
     }
 
     // ✅ Navigation Logic
